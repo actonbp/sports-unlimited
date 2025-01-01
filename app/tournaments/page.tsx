@@ -111,7 +111,7 @@ export default function TournamentsPage() {
       <AnimatePresence>
         {filteredTournaments.map((tournament, index) => (
           <motion.div
-            key={tournament.id}
+            key={tournament.name}
             className="bg-white rounded-lg shadow-md p-6 mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -135,14 +135,14 @@ export default function TournamentsPage() {
                 </div>
               </div>
               <button 
-                onClick={() => setExpandedTournament(expandedTournament === tournament.id ? null : tournament.id)}
+                onClick={() => setExpandedTournament(expandedTournament === tournament.name ? null : tournament.name)}
                 className="text-primary hover:text-secondary transition-colors duration-200"
               >
-                {expandedTournament === tournament.id ? 
+                {expandedTournament === tournament.name ? 
                   <ChevronUp size={20} /> : <ChevronDown size={20} />}
               </button>
             </div>
-            {expandedTournament === tournament.id && (
+            {expandedTournament === tournament.name && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
