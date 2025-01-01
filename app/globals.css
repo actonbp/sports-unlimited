@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #0E4C92;  /* Deep Blue */
+  --color-secondary: #D22B2B;  /* Bright Red */
+  --color-accent: #FFFFFF;  /* White */
+  --color-background: #F0F8FF;  /* Light Blue Background */
+}
+
+body {
+  background-color: var(--color-background);
+  color: #333;
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.bg-accent {
+  background-color: var(--color-accent);
+}
+
