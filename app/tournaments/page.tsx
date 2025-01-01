@@ -51,13 +51,15 @@ export default function TournamentsPage() {
       tournament.name.toLowerCase().includes(filter.toLowerCase()) ||
       tournament.ageGroup.includes(filter)
     )
-    .sort((a: Tournament, b: Tournament) => {
+    .sort((a, b) => {
       if (sortBy === 'date') {
-        return new Date(a.date).getTime() - new Date(b.date).getTime()
+        const dateA = new Date(a.date).getTime();
+        const dateB = new Date(b.date).getTime();
+        return dateA - dateB;
       } else if (sortBy === 'name') {
-        return a.name.localeCompare(b.name)
+        return a.name.localeCompare(b.name);
       }
-      return 0
+      return 0;
     })
 
   return (
