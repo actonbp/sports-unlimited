@@ -11,6 +11,11 @@ interface Tournament {
   description: string;
   ageGroup: string[];
   registrationLink: string;
+  format: string;
+  registration: {
+    deadline: string;
+    fee: string;
+  };
 }
 
 const tournaments: Tournament[] = [
@@ -20,7 +25,12 @@ const tournaments: Tournament[] = [
     location: "Durham Community Center",
     description: "Annual spring basketball tournament for youth teams.",
     ageGroup: ["8-10", "11-13", "14-16"],
-    registrationLink: "#"
+    registrationLink: "#",
+    format: "Round Robin + Single Elimination Playoffs",
+    registration: {
+      deadline: "2024-04-01",
+      fee: "$150 per team"
+    }
   },
   {
     name: "Summer Soccer Cup",
@@ -28,7 +38,12 @@ const tournaments: Tournament[] = [
     location: "Durham Sports Complex",
     description: "Summer soccer tournament featuring teams from across the region.",
     ageGroup: ["11-13", "14-16"],
-    registrationLink: "#"
+    registrationLink: "#",
+    format: "Group Stage + Knockout Rounds",
+    registration: {
+      deadline: "2024-06-05",
+      fee: "$175 per team"
+    }
   },
   {
     name: "Fall Basketball Tournament",
@@ -36,7 +51,12 @@ const tournaments: Tournament[] = [
     location: "Durham Recreation Center",
     description: "Fall basketball tournament for all skill levels.",
     ageGroup: ["8-10", "11-13"],
-    registrationLink: "#"
+    registrationLink: "#",
+    format: "Double Elimination",
+    registration: {
+      deadline: "2024-08-25",
+      fee: "$125 per team"
+    }
   }
 ]
 
