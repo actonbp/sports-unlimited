@@ -4,37 +4,40 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Calendar, MapPin, Users, Filter, ChevronDown, ChevronUp } from 'lucide-react'
 
-const tournaments = [
-  { 
-    id: 1, 
-    name: 'Durham Summer Basketball League', 
-    date: 'July 15-20, 2023', 
-    location: 'Durham Bulls Athletic Park', 
-    ageGroup: '12-14',
-    description: 'A week-long basketball tournament featuring teams from across Durham. Experience the thrill of competition and showcase your skills!',
-    format: 'Round-robin followed by single-elimination playoffs',
-    registration: { deadline: 'July 1, 2023', fee: '$150 per team' }
+interface Tournament {
+  name: string;
+  date: string;
+  location: string;
+  description: string;
+  ageGroup: string[];
+  registrationLink: string;
+}
+
+const tournaments: Tournament[] = [
+  {
+    name: "Spring Basketball Classic",
+    date: "2024-04-15",
+    location: "Durham Community Center",
+    description: "Annual spring basketball tournament for youth teams.",
+    ageGroup: ["8-10", "11-13", "14-16"],
+    registrationLink: "#"
   },
-  { 
-    id: 2, 
-    name: 'Bull City Fall Soccer Tournament', 
-    date: 'September 5-10, 2023', 
-    location: 'Rock Quarry Park', 
-    ageGroup: '15-17',
-    description: 'Join us for the largest youth soccer tournament in Durham. Compete against top teams and develop your soccer skills.',
-    format: 'Group stage followed by knockout rounds',
-    registration: { deadline: 'August 20, 2023', fee: '$200 per team' }
+  {
+    name: "Summer Soccer Cup",
+    date: "2024-06-20",
+    location: "Durham Sports Complex",
+    description: "Summer soccer tournament featuring teams from across the region.",
+    ageGroup: ["11-13", "14-16"],
+    registrationLink: "#"
   },
-  { 
-    id: 3, 
-    name: 'Triangle Winter Volleyball Championship', 
-    date: 'December 1-5, 2023', 
-    location: 'Durham Convention Center', 
-    ageGroup: '18-21',
-    description: 'An indoor volleyball tournament bringing together the best young talent from the Triangle area. Show off your spikes and digs!',
-    format: 'Double elimination',
-    registration: { deadline: 'November 15, 2023', fee: '$175 per team' }
-  },
+  {
+    name: "Fall Basketball Tournament",
+    date: "2024-09-10",
+    location: "Durham Recreation Center",
+    description: "Fall basketball tournament for all skill levels.",
+    ageGroup: ["8-10", "11-13"],
+    registrationLink: "#"
+  }
 ]
 
 export default function TournamentsPage() {
@@ -48,9 +51,9 @@ export default function TournamentsPage() {
       tournament.name.toLowerCase().includes(filter.toLowerCase()) ||
       tournament.ageGroup.includes(filter)
     )
-    .sort((a, b) => {
+    .sort((a: Tournament, b: Tournament) => {
       if (sortBy === 'date') {
-        return new Date(a.date) - new Date(b.date)
+        return new Date(a.date).getTime() - new Date(b.date).getTime()
       } else if (sortBy === 'name') {
         return a.name.localeCompare(b.name)
       }
