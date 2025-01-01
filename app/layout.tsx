@@ -15,10 +15,10 @@ export const metadata: Metadata = {
     description: 'Join exciting sports tournaments and training programs in Durham. Building community through youth sports.',
     images: [
       {
-        url: '/images/durham_skyline.png',
+        url: '/images/preview-card.png',
         width: 1200,
         height: 630,
-        alt: 'Durham Skyline',
+        alt: 'Sports Unlimited - Empowering Durham\'s Youth',
       }
     ],
     locale: 'en_US',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Sports Unlimited - Youth Sports in Durham',
     description: 'Join exciting sports tournaments and training programs in Durham. Building community through youth sports.',
-    images: ['/images/durham_skyline.png'],
+    images: ['/images/preview-card.png'],
     creator: '@SportsUnlimited',
   },
   robots: {
