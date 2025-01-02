@@ -205,7 +205,12 @@ export default function Home() {
               className="relative z-10"
               priority
               loading="eager"
-              unoptimized
+              onError={(e) => {
+                console.error('Error loading basketball image:', e);
+                const target = e.target as HTMLImageElement;
+                target.onerror = null; // Prevent infinite loop
+                target.src = '/images/basketball-player.jpg'; // Fallback image
+              }}
             />
           </motion.div>
           <motion.p 
