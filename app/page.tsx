@@ -183,7 +183,7 @@ export default function Home() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">Ready to Play Hard?</h2>
           <p className="text-base sm:text-lg md:text-xl mb-6">Tap the basketball to see how excited we are to have you!</p>
           <motion.div
-            className="inline-block cursor-pointer relative"
+            className="inline-block cursor-pointer relative bg-white/10 p-4 rounded-full"
             whileHover={{ scale: 1.1, rotate: 10 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleBounce}
@@ -196,14 +196,16 @@ export default function Home() {
               }
             } : {}}
           >
-            <div className="absolute -inset-2 rounded-full bg-black/40 blur-md transform translate-y-2"></div>
+            <div className="absolute -inset-4 rounded-full bg-white/20 blur-lg transform translate-y-2"></div>
             <Image
               src="/images/basketball.png"
               alt="Basketball"
-              width={100}
-              height={100}
+              width={120}
+              height={120}
               className="relative z-10"
               priority
+              loading="eager"
+              unoptimized
             />
           </motion.div>
           <motion.p 
