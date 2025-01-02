@@ -62,8 +62,8 @@ const tournaments: Tournament[] = [
 
 export default function TournamentsPage() {
   const [filter, setFilter] = useState('')
-  const [selectedTournament, setSelectedTournament] = useState(null)
-  const [expandedTournament, setExpandedTournament] = useState(null)
+  const [selectedTournament, setSelectedTournament] = useState<Tournament | null>(null)
+  const [expandedTournament, setExpandedTournament] = useState<string | null>(null)
   const [sortBy, setSortBy] = useState('date')
 
   const filteredTournaments = tournaments
