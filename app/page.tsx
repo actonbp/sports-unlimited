@@ -8,6 +8,21 @@ import Image from 'next/image'
 import WaitlistPopup from '@/components/WaitlistPopup'
 import NewsTicker from '@/components/NewsTicker'
 
+const heroImages = [
+  {
+    src: '/images/slides_image-1.jpg',
+    alt: 'Sports Unlimited Team Photo'
+  },
+  {
+    src: '/images/slides_image-2.jpg',
+    alt: 'Sports Unlimited Action Shot'
+  },
+  {
+    src: '/images/durham-skyline.png',
+    alt: 'Sports Unlimited Team Practice'
+  }
+]
+
 const carouselImages = [
   {
     src: '/images/IMG_7701.jpg',
@@ -70,7 +85,7 @@ export default function Home() {
       <NewsTicker />
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          {carouselImages.map((image, index) => (
+          {heroImages.map((image, index) => (
             <Image
               key={image.src}
               src={image.src}
