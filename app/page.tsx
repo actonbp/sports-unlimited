@@ -9,10 +9,9 @@ import WaitlistPopup from '@/components/WaitlistPopup'
 import NewsTicker from '@/components/NewsTicker'
 
 const carouselImages = [
-  { src: '/images/basketball-player.jpg', alt: 'Basketball player dunking' },
-  { src: '/images/soccer-kids.jpg', alt: 'Kids playing soccer' },
-  { src: '/images/tennis-serve.jpg', alt: 'Tennis player serving' },
-  { src: '/images/swimming-race.jpg', alt: 'Swimming competition' },
+  '/images/slides_image-1.jpg',
+  '/images/slides_image-2.jpg',
+  '/images/slides_image-3.jpg',
 ]
 
 export default function Home() {
@@ -58,20 +57,25 @@ export default function Home() {
       <NewsTicker />
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image
-            src="/images/durham-skyline.png"
-            alt="Durham City Skyline"
-            fill
-            className="object-contain"
-            quality={100}
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-blue-900/20"></div>
+          {carouselImages.map((src, index) => (
+            <Image
+              key={src}
+              src={src}
+              alt={`Sports Unlimited Slide ${index + 1}`}
+              fill
+              className={`object-cover transition-opacity duration-1000 ${
+                currentImage === index ? 'opacity-100' : 'opacity-0'
+              }`}
+              quality={100}
+              priority
+              sizes="100vw"
+            />
+          ))}
+          <div className="absolute inset-0 bg-blue-900/30"></div>
         </div>
-        <div className="relative z-10 text-center text-white px-4 max-w-md mx-auto">
+        <div className="relative z-10 text-center text-white px-4 max-w-3xl mx-auto">
           <motion.h1 
-            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4"
+            className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -79,7 +83,7 @@ export default function Home() {
             We Play Hard
           </motion.h1>
           <motion.p 
-            className="text-base sm:text-lg md:text-xl mb-6"
+            className="text-xl sm:text-2xl md:text-3xl mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
