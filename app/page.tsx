@@ -76,7 +76,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Empowering Durham's Youth
+            We Play Hard
           </motion.h1>
           <motion.p 
             className="text-base sm:text-lg md:text-xl mb-6"
@@ -84,7 +84,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Join Sports Unlimited for an unforgettable sports experience in the heart of Durham!
+            Building Community Through Sports
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
