@@ -197,21 +197,14 @@ export default function Home() {
             } : {}}
           >
             <div className="absolute -inset-4 rounded-full bg-white/20 blur-lg transform translate-y-2"></div>
-            <Image
-              src="/images/basketball.png"
-              alt="Basketball"
-              width={120}
-              height={120}
-              className="relative z-10"
-              priority
-              loading="eager"
-              onError={(e) => {
-                console.error('Error loading basketball image:', e);
-                const target = e.target as HTMLImageElement;
-                target.onerror = null; // Prevent infinite loop
-                target.src = '/images/basketball-player.jpg'; // Fallback image
-              }}
-            />
+            <div className="relative z-10 w-[120px] h-[120px] bg-white/10 rounded-full overflow-hidden">
+              <img
+                src="/images/basketball.png"
+                alt="Basketball"
+                className="w-full h-full object-contain"
+                style={{ filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.3))' }}
+              />
+            </div>
           </motion.div>
           <motion.p 
             className="mt-4 text-xl sm:text-2xl font-bold"
