@@ -169,24 +169,40 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-10 sm:py-12 md:py-16 px-4 bg-primary text-accent">
+      <section className="py-10 sm:py-12 md:py-16 px-4 bg-black/90 text-accent">
         <div className="container mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">Ready to Join the Fun?</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">Ready to Play Hard?</h2>
           <p className="text-base sm:text-lg md:text-xl mb-6">Tap the basketball to see how excited we are to have you!</p>
           <motion.div
-            className="inline-block cursor-pointer"
-            whileHover={{ scale: 1.1 }}
+            className="inline-block cursor-pointer relative"
+            whileHover={{ scale: 1.1, rotate: 10 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleBounce}
+            animate={bounceCount > 0 ? {
+              y: [0, -100, 0],
+              rotate: [0, 360, 720],
+              transition: {
+                duration: 1,
+                ease: "easeOut",
+              }
+            } : {}}
           >
+            <div className="absolute -inset-1 rounded-full bg-black/20 blur-sm transform translate-y-2"></div>
             <Image
               src="/images/basketball.png"
               alt="Basketball"
-              width={60}
-              height={60}
+              width={80}
+              height={80}
+              className="relative"
             />
           </motion.div>
-          <p className="mt-4 text-xl sm:text-2xl font-bold">Bounces: {bounceCount}</p>
+          <motion.p 
+            className="mt-4 text-xl sm:text-2xl font-bold"
+            animate={bounceCount > 0 ? { scale: [1, 1.2, 1] } : {}}
+            transition={{ duration: 0.5 }}
+          >
+            Bounces: {bounceCount}
+          </motion.p>
           <Link href="/registration" className="mt-6 inline-block bg-secondary text-accent px-6 py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-opacity-90 transition-colors duration-300">
             Sign Up Now
           </Link>

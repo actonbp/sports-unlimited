@@ -5,7 +5,7 @@ const navItems = [
   { name: 'Home', href: '/' },
   { name: 'Tournaments', href: '/tournaments' },
   { name: 'Training', href: '/training' },
-  { name: 'Community', href: '/community' },
+  { name: 'SAVE Sports', href: '/save' },
   { name: 'About Us', href: '/about' },
   { name: 'Sponsorships', href: '/sponsorships' },
 ]

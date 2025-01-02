@@ -10,10 +10,10 @@ const navItems = [
   { name: 'Home', href: '/' },
   { name: 'Tournaments', href: '/tournaments' },
   { name: 'Training', href: '/training' },
-  { name: 'Community', href: '/community' },
+  { name: 'SAVE', href: '/save' },
   { name: 'Sponsorships', href: '/sponsorships' },
   { name: 'Podcast', href: '/podcast' },
-  { name: 'About Us', href: '/about' },
+  { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ]
 
@@ -41,7 +41,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex space-x-6">
+          <ul className="hidden md:flex space-x-8">
             {navItems.map((item) => (
               <motion.li key={item.name} whileHover={{ scale: 1.1 }}>
                 <Link
