@@ -8,32 +8,25 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://sports-unlimited.vercel.app'),
-  title: 'Sports Unlimited - Youth Sports in Durham',
-  description: 'Join exciting sports tournaments and training programs in Durham. Building community through youth sports.',
+  title: 'Sports Unlimited',
+  description: 'Building community through sports in Durham, NC',
   openGraph: {
-    title: 'Sports Unlimited - Youth Sports in Durham',
-    description: 'Join exciting sports tournaments and training programs in Durham. Building community through youth sports.',
+    title: 'Sports Unlimited',
+    description: 'Building community through sports in Durham, NC',
     images: [
       {
-        url: '/images/preview-card.png',
+        url: '/images/preview_card.png',
         width: 1200,
         height: 630,
-        alt: 'Sports Unlimited - Empowering Durham\'s Youth',
+        alt: 'Sports Unlimited Preview'
       }
-    ],
-    locale: 'en_US',
-    type: 'website',
+    ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sports Unlimited - Youth Sports in Durham',
-    description: 'Join exciting sports tournaments and training programs in Durham. Building community through youth sports.',
-    images: ['/images/preview-card.png'],
-    creator: '@SportsUnlimited',
-  },
-  robots: {
-    index: true,
-    follow: true,
+    title: 'Sports Unlimited',
+    description: 'Building community through sports in Durham, NC',
+    images: ['/images/preview_card.png']
   }
 }
 
