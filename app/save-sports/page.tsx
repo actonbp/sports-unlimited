@@ -23,7 +23,7 @@ const initiatives = [
 ]
 
 export default function SaveSportsPage() {
-  const [expandedInitiative, setExpandedInitiative] = useState(null)
+  const [expandedInitiative, setExpandedInitiative] = useState<number | null>(null)
 
   return (
     <div className="container mx-auto px-4 py-8">
