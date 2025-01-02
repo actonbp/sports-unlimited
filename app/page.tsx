@@ -9,9 +9,18 @@ import WaitlistPopup from '@/components/WaitlistPopup'
 import NewsTicker from '@/components/NewsTicker'
 
 const carouselImages = [
-  '/images/slides_image-1.jpg',
-  '/images/slides_image-2.jpg',
-  '/images/slides_image-3.jpg',
+  {
+    src: '/images/slides_image-1.jpg',
+    alt: 'Sports Unlimited Slide 1'
+  },
+  {
+    src: '/images/slides_image-2.jpg',
+    alt: 'Sports Unlimited Slide 2'
+  },
+  {
+    src: '/images/slides_image-3.jpg',
+    alt: 'Sports Unlimited Slide 3'
+  }
 ]
 
 export default function Home() {
@@ -57,11 +66,11 @@ export default function Home() {
       <NewsTicker />
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          {carouselImages.map((src, index) => (
+          {carouselImages.map((image, index) => (
             <Image
-              key={src}
-              src={src}
-              alt={`Sports Unlimited Slide ${index + 1}`}
+              key={image.src}
+              src={image.src}
+              alt={image.alt}
               fill
               className={`object-cover transition-opacity duration-1000 ${
                 currentImage === index ? 'opacity-100' : 'opacity-0'
