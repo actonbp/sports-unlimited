@@ -10,16 +10,20 @@ import NewsTicker from '@/components/NewsTicker'
 
 const carouselImages = [
   {
-    src: '/images/slides_image-1.jpg',
-    alt: 'Sports Unlimited Slide 1'
+    src: '/images/IMG_7701.jpg',
+    alt: 'Sports Unlimited Player Registration'
   },
   {
-    src: '/images/slides_image-2.jpg',
-    alt: 'Sports Unlimited Slide 2'
+    src: '/images/IMG_7702.jpg',
+    alt: 'Sports Unlimited Team Meeting'
   },
   {
-    src: '/images/slides_image-3.jpg',
-    alt: 'Sports Unlimited Slide 3'
+    src: '/images/IMG_7703.jpg',
+    alt: 'Sports Unlimited Community Event'
+  },
+  {
+    src: '/images/IMG1.png',
+    alt: 'Sports Unlimited Action Shot'
   }
 ]
 
