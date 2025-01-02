@@ -196,13 +196,14 @@ export default function Home() {
               }
             } : {}}
           >
-            <div className="absolute -inset-1 rounded-full bg-black/20 blur-sm transform translate-y-2"></div>
+            <div className="absolute -inset-2 rounded-full bg-black/40 blur-md transform translate-y-2"></div>
             <Image
               src="/images/basketball.png"
               alt="Basketball"
-              width={80}
-              height={80}
-              className="relative"
+              width={100}
+              height={100}
+              className="relative z-10"
+              priority
             />
           </motion.div>
           <motion.p 
