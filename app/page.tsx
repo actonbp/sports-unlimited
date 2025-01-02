@@ -199,7 +199,7 @@ export default function Home() {
             <div className="absolute -inset-4 rounded-full bg-white/20 blur-lg transform translate-y-2"></div>
             <div className="relative z-10 w-[120px] h-[120px] bg-white/10 rounded-full overflow-hidden">
               <img
-                src="/images/basketball.png"
+                src="/images/basketball.jpg"
                 alt="Basketball"
                 className="w-full h-full object-contain"
                 style={{ filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.3))' }}
