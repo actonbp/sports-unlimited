@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Calendar, MapPin, Users, ChevronDown, ChevronUp } from 'lucide-react'
+import { FormEvent } from 'react'
 
 const communityEvents = [
   {
@@ -44,9 +45,9 @@ const communityEvents = [
 
 export default function CommunityPage() {
   const [email, setEmail] = useState('')
-  const [expandedEvent, setExpandedEvent] = useState(null)
+  const [expandedEvent, setExpandedEvent] = useState<number | null>(null)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     // Here you would typically handle the form submission
     console.log('Submitted email:', email)
