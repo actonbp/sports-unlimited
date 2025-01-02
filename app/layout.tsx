@@ -7,29 +7,20 @@ import { Metadata } from 'next'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sports-unlimited.vercel.app'),
-  title: 'Sports Unlimited',
-  description: 'Building community through sports in Durham, NC',
+  metadataBase: new URL("https://sportsunlimitednc.com"),
+  title: 'Sports Unlimited - Youth Sports Programs in Durham',
+  description: 'Join Sports Unlimited for youth sports programs, tournaments, and training in Durham, NC. Building community through sports.',
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://sports-unlimited.vercel.app',
-    siteName: 'Sports Unlimited',
-    title: 'Sports Unlimited',
-    description: 'Building community through sports in Durham, NC',
-    images: [{
-      url: 'https://sports-unlimited.vercel.app/images/preview_card.png',
-      width: 1200,
-      height: 630,
-      alt: 'Sports Unlimited Preview'
-    }]
+    title: 'Sports Unlimited - Youth Sports Programs in Durham',
+    description: 'Join Sports Unlimited for youth sports programs, tournaments, and training in Durham, NC. Building community through sports.',
+    images: ['/images/preview_card.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sports Unlimited',
-    description: 'Building community through sports in Durham, NC',
-    images: ['https://sports-unlimited.vercel.app/images/preview_card.png']
-  }
+    title: 'Sports Unlimited - Youth Sports Programs in Durham',
+    description: 'Join Sports Unlimited for youth sports programs, tournaments, and training in Durham, NC. Building community through sports.',
+    images: ['/images/preview_card.png'],
+  },
 }
 
 export default function RootLayout({
