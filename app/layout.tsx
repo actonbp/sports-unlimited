@@ -11,22 +11,24 @@ export const metadata: Metadata = {
   title: 'Sports Unlimited',
   description: 'Building community through sports in Durham, NC',
   openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://sports-unlimited.vercel.app',
+    siteName: 'Sports Unlimited',
     title: 'Sports Unlimited',
     description: 'Building community through sports in Durham, NC',
-    images: [
-      {
-        url: '/images/preview_card.png',
-        width: 1200,
-        height: 630,
-        alt: 'Sports Unlimited Preview'
-      }
-    ]
+    images: [{
+      url: 'https://sports-unlimited.vercel.app/images/preview_card.png',
+      width: 1200,
+      height: 630,
+      alt: 'Sports Unlimited Preview'
+    }]
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Sports Unlimited',
     description: 'Building community through sports in Durham, NC',
-    images: ['/images/preview_card.png']
+    images: ['https://sports-unlimited.vercel.app/images/preview_card.png']
   }
 }
 
