@@ -37,7 +37,7 @@ const events: Event[] = [
     category: 'Soccer',
     capacity: '25 spots remaining',
     description: 'Three days of focused soccer skills development, including dribbling, passing, and shooting techniques.',
-    image: '/images/soccer-kids.jpg',
+    image: '/images/durham-skyline.png',
     registrationOpen: true
   },
   {
@@ -48,7 +48,7 @@ const events: Event[] = [
     category: 'Multi-Sport',
     capacity: 'Unlimited',
     description: 'Come explore all our fall programs! Meet coaches, try different sports, and enjoy family activities.',
-    image: '/images/tennis-serve.jpg',
+    image: '/images/old_logo.JPG',
     registrationOpen: false
   },
   {
@@ -59,7 +59,7 @@ const events: Event[] = [
     category: 'Swimming',
     capacity: '15 spots remaining',
     description: 'Intensive training camp for competitive swimmers. Focus on technique, speed, and race strategy.',
-    image: '/images/swimming-race.jpg',
+    image: '/images/preview-card.png',
     registrationOpen: true
   }
 ]
