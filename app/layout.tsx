@@ -7,19 +7,19 @@ import { Metadata } from 'next'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sportsunlimitednc.com"),
-  title: 'Sports Unlimited - Youth Sports Programs in Durham',
-  description: 'Join Sports Unlimited for youth sports programs, tournaments, and training in Durham, NC. Building community through sports.',
+  title: 'Sports Unlimited',
+  description: 'Building Community Through Sports in Durham, NC',
+  metadataBase: new URL('https://sportsunlimitednc.com'),
   openGraph: {
-    title: 'Sports Unlimited - Youth Sports Programs in Durham',
-    description: 'Join Sports Unlimited for youth sports programs, tournaments, and training in Durham, NC. Building community through sports.',
-    images: ['/images/preview_card.png'],
+    title: 'Sports Unlimited',
+    description: 'Building Community Through Sports in Durham, NC',
+    images: ['/images/durham-skyline.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sports Unlimited - Youth Sports Programs in Durham',
-    description: 'Join Sports Unlimited for youth sports programs, tournaments, and training in Durham, NC. Building community through sports.',
-    images: ['/images/preview_card.png'],
+    title: 'Sports Unlimited',
+    description: 'Building Community Through Sports in Durham, NC',
+    images: ['/images/durham-skyline.jpg'],
   },
 }
 

@@ -9,36 +9,33 @@ import WaitlistPopup from '@/components/WaitlistPopup'
 import NewsTicker from '@/components/NewsTicker'
 
 const heroImages = [
-  {
-    src: '/images/slides_image-1.jpg',
-    alt: 'Sports Unlimited Team Photo'
-  },
-  {
-    src: '/images/slides_image-2.jpg',
-    alt: 'Sports Unlimited Action Shot'
-  },
-  {
-    src: '/images/durham-skyline.png',
-    alt: 'Sports Unlimited Team Practice'
-  }
+  '/images/slides_image-1.jpg',
+  '/images/slides_image-2.jpg',
+  '/images/slides_image-3.jpg',
+  '/images/slides_image-4.png',
+  '/images/slides_image-5.jpg',
 ]
 
 const carouselImages = [
   {
     src: '/images/IMG_7701.jpg',
-    alt: 'Sports Unlimited Player Registration'
+    alt: 'Player Registration',
+    title: 'Player Registration'
   },
   {
     src: '/images/IMG_7702.jpg',
-    alt: 'Sports Unlimited Team Meeting'
+    alt: 'Team Meeting',
+    title: 'Team Meeting'
   },
   {
     src: '/images/IMG_7703.jpg',
-    alt: 'Sports Unlimited Community Event'
+    alt: 'Community Event',
+    title: 'Community Event'
   },
   {
     src: '/images/IMG1.png',
-    alt: 'Sports Unlimited Action Shot'
+    alt: 'Action Shot',
+    title: 'Action Shot'
   }
 ]
 
@@ -87,16 +84,14 @@ export default function Home() {
         <div className="absolute inset-0">
           {heroImages.map((image, index) => (
             <Image
-              key={image.src}
-              src={image.src}
-              alt={image.alt}
+              key={index}
+              src={image}
+              alt="Sports Unlimited Hero"
               fill
+              priority={index === 0}
               className={`object-cover transition-opacity duration-1000 ${
                 currentImage === index ? 'opacity-100' : 'opacity-0'
               }`}
-              quality={100}
-              priority
-              sizes="100vw"
             />
           ))}
           <div className="absolute inset-0 bg-blue-900/30"></div>
