@@ -23,75 +23,111 @@ export default async function Image() {
           alignItems: 'center',
           justifyContent: 'center',
           padding: '40px',
+          position: 'relative',
         }}
       >
+        {/* Background pattern */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            opacity: 0.1,
+            backgroundImage: 'radial-gradient(circle at 25px 25px, white 2%, transparent 0%)',
+            backgroundSize: '50px 50px',
+          }}
+        />
+        
+        {/* Logo/Image */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            marginBottom: '20px',
+            marginBottom: '30px',
+            filter: 'drop-shadow(0px 4px 8px rgba(0,0,0,0.3))',
           }}
         >
           <img
             src={`https://sports-unlimited.vercel.app/images/basketball.jpg`}
             alt="Basketball"
-            width="120"
-            height="120"
+            width="150"
+            height="150"
             style={{
-              borderRadius: '60px',
-              marginRight: '20px',
+              borderRadius: '75px',
             }}
           />
         </div>
-        <h1
-          style={{
-            fontSize: '60px',
-            fontWeight: 'bold',
-            color: 'white',
-            textAlign: 'center',
-            marginBottom: '20px',
-            textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
-          }}
-        >
-          Sports Unlimited
-        </h1>
-        <p
-          style={{
-            fontSize: '32px',
-            color: 'white',
-            textAlign: 'center',
-            opacity: 0.9,
-            maxWidth: '800px',
-          }}
-        >
-          Building Community Through Sports
-        </p>
+
+        {/* Title */}
         <div
           style={{
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: '40px',
+            gap: '16px',
           }}
         >
-          <div
+          <h1
             style={{
-              background: '#D21312',
-              color: 'white',
-              padding: '12px 24px',
-              borderRadius: '24px',
-              fontSize: '24px',
+              fontSize: '72px',
               fontWeight: 'bold',
+              color: 'white',
+              textAlign: 'center',
+              margin: 0,
+              lineHeight: 1.1,
+              textShadow: '2px 2px 8px rgba(0,0,0,0.3)',
             }}
           >
-            Join Our Community
-          </div>
+            Sports Unlimited
+          </h1>
+          
+          <p
+            style={{
+              fontSize: '36px',
+              color: 'white',
+              textAlign: 'center',
+              opacity: 0.9,
+              margin: 0,
+              maxWidth: '800px',
+              textShadow: '1px 1px 4px rgba(0,0,0,0.2)',
+            }}
+          >
+            Building Community Through Sports
+          </p>
+        </div>
+
+        {/* Call to action */}
+        <div
+          style={{
+            marginTop: '40px',
+            background: '#D21312',
+            color: 'white',
+            padding: '16px 32px',
+            borderRadius: '30px',
+            fontSize: '28px',
+            fontWeight: 'bold',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+          }}
+        >
+          Join Our Community
         </div>
       </div>
     ),
     {
       ...size,
+      fonts: [
+        {
+          name: 'Inter',
+          data: await fetch(
+            new URL('https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYAZ9hiA.woff2')
+          ).then((res) => res.arrayBuffer()),
+          weight: 700,
+          style: 'normal',
+        },
+      ],
     }
   )
 } 

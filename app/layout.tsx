@@ -33,8 +33,28 @@ export const metadata: Metadata = {
     images: ['https://sports-unlimited.vercel.app/twitter-image'],
     creator: '@SportsUnlimited',
   },
+  other: {
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-title': 'Sports Unlimited',
+    'format-detection': 'telephone=no',
+    'apple-itunes-app': 'app-id=myAppStoreID',
+    'og:image:type': 'image/png',
+  },
+  appleWebApp: {
+    title: 'Sports Unlimited',
+    statusBarStyle: 'black-translucent',
+    startupImage: [
+      {
+        url: 'https://sports-unlimited.vercel.app/opengraph-image',
+        media: '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)',
+      }
+    ],
+  },
   icons: {
     icon: '/favicon.ico',
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
 }
 
