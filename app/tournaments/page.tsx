@@ -99,7 +99,11 @@ export default function TournamentsPage() {
       }
     })
 
-  const uniqueAgeGroups = Array.from(new Set(tournaments.map(t => t.ageGroup)))
+  const uniqueAgeGroups = Array.from(
+    new Set(
+      tournaments.flatMap(t => t.ageGroup)
+    )
+  ).sort()
 
   return (
     <div className="container mx-auto px-4 py-8">
