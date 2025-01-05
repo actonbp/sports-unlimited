@@ -1,25 +1,39 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
-import Header from '@/components/Header'
+import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { Metadata } from 'next'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Sports Unlimited',
-  description: 'Building Community Through Sports in Durham, NC',
-  metadataBase: new URL('https://sportsunlimitednc.com'),
+  title: 'Sports Unlimited - Building Community Through Sports',
+  description: 'Join exciting sports tournaments in Durham and showcase your skills! Our events bring together young athletes from across the Triangle area for friendly competition and community building.',
   openGraph: {
-    title: 'Sports Unlimited',
-    description: 'Building Community Through Sports in Durham, NC',
-    images: ['/images/durham-skyline.jpg'],
+    title: 'Sports Unlimited - Building Community Through Sports',
+    description: 'Join exciting sports tournaments in Durham and showcase your skills! Our events bring together young athletes from across the Triangle area.',
+    url: 'https://sports-unlimited.vercel.app',
+    siteName: 'Sports Unlimited',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Sports Unlimited - Building Community Through Sports',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sports Unlimited',
-    description: 'Building Community Through Sports in Durham, NC',
-    images: ['/images/durham-skyline.jpg'],
+    title: 'Sports Unlimited - Building Community Through Sports',
+    description: 'Join exciting sports tournaments in Durham and showcase your skills! Our events bring together young athletes from across the Triangle area.',
+    images: ['/images/og-image.jpg'],
+    creator: '@SportsUnlimited',
+  },
+  icons: {
+    icon: '/favicon.ico',
   },
 }
 
@@ -31,8 +45,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <main>{children}</main>
+        <Navbar />
+        <main className="min-h-screen">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
