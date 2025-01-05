@@ -82,11 +82,10 @@ export default function TournamentsPage() {
 
   const filteredTournaments = tournaments
     .filter(tournament =>
-      (filterAgeGroup === 'all' || tournament.ageGroup === filterAgeGroup) &&
-      (filter === '' || 
+      (filterAgeGroup === 'all' || tournament.ageGroup.includes(filterAgeGroup)) &&
+      (filter === '' ||
         tournament.name.toLowerCase().includes(filter.toLowerCase()) ||
-        tournament.description.toLowerCase().includes(filter.toLowerCase()))
-    )
+        tournament.description.toLowerCase().includes(filter.toLowerCase())))
     .sort((a, b) => {
       switch (sortBy) {
         case 'date':
