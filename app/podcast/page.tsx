@@ -29,11 +29,38 @@ const podcastEpisodes = [
   },
 ]
 
-const podcastPlatforms = [
-  { name: 'Spotify', icon: '/images/spotify-icon.png', url: 'https://open.spotify.com' },
-  { name: 'Apple Podcasts', icon: '/images/apple-podcasts-icon.png', url: 'https://podcasts.apple.com' },
-  { name: 'Google Podcasts', icon: '/images/google-podcasts-icon.png', url: 'https://podcasts.google.com' },
-  { name: 'Stitcher', icon: '/images/stitcher-icon.png', url: 'https://www.stitcher.com' },
+interface PodcastPlatform {
+  name: string;
+  logo: string;
+  url: string;
+  altText: string;
+}
+
+const podcastPlatforms: PodcastPlatform[] = [
+  {
+    name: 'Apple Podcasts',
+    logo: '/images/logos/apple_podcasts.png',
+    url: '#',
+    altText: 'Listen on Apple Podcasts'
+  },
+  {
+    name: 'Spotify',
+    logo: '/images/logos/spotify_logo.png',
+    url: '#',
+    altText: 'Listen on Spotify'
+  },
+  {
+    name: 'Google Podcasts',
+    logo: '/images/logos/google_podcasts.png',
+    url: '#',
+    altText: 'Listen on Google Podcasts'
+  },
+  {
+    name: 'Stitcher',
+    logo: '/images/logos/stitcher-logo-vector.png',
+    url: '#',
+    altText: 'Listen on Stitcher'
+  }
 ]
 
 export default function PodcastPage() {
@@ -116,7 +143,7 @@ export default function PodcastPage() {
                   className={`flex items-center p-2 rounded-lg ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'} transition-colors duration-200`}
                 >
                   <Image
-                    src={platform.icon}
+                    src={platform.logo}
                     alt={`${platform.name} icon`}
                     width={32}
                     height={32}

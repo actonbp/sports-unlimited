@@ -65,7 +65,9 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-accent border-opacity-20 text-center">
-          <p>&copy; 2023 Sports Unlimited LLC. All rights reserved.</p>
+          <div className="text-center text-sm text-gray-500">
+            <p>&copy; 2025 Sports Unlimited LLC. All rights reserved.</p>
+          </div>
         </div>
       </div>
     </footer>

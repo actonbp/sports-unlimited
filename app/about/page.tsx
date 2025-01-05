@@ -38,9 +38,7 @@ export default function AboutPage() {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         Sports Unlimited is dedicated to empowering youth through sports and making a positive 
-        impact in the Durham community. Founded in 2010, we've quickly become a leading force in 
-        youth sports development. Our mission is to provide opportunities for young athletes 
-        to develop their skills, build character, and achieve their full potential.
+        impact in the Durham community.
       </motion.p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -48,14 +46,17 @@ export default function AboutPage() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
+          className="relative flex justify-center"
         >
-          <Image
-            src="/images/about-us.jpg"
-            alt="Sports Unlimited Team"
-            width={600}
-            height={400}
-            className="rounded-lg shadow-md"
-          />
+          <div className="relative h-[500px] w-[80%] rounded-lg overflow-hidden shadow-lg bg-white">
+            <Image
+              src="/images/test_logo.png"
+              alt="Sports Unlimited Team"
+              fill
+              className="object-contain p-4"
+              priority
+            />
+          </div>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, x: 20 }}

@@ -71,17 +71,17 @@ export default function TrainingPage() {
           <li>
             <h3 className="text-lg font-semibold text-primary">Summer Basketball Intensive</h3>
             <p className="text-gray-700">A week-long camp focusing on basketball fundamentals and advanced techniques.</p>
-            <p className="text-sm text-gray-500">Date: July 10-15, 2023 | Ages: 12-17</p>
+            <p className="text-sm text-gray-500">Date: July 10-15, 2025 | Ages: 12-17</p>
           </li>
           <li>
             <h3 className="text-lg font-semibold text-primary">Soccer Skills Workshop</h3>
             <p className="text-gray-700">Improve your soccer skills with drills and scrimmages led by professional coaches.</p>
-            <p className="text-sm text-gray-500">Date: August 5-7, 2023 | Ages: 8-14</p>
+            <p className="text-sm text-gray-500">Date: August 5-7, 2025 | Ages: 8-14</p>
           </li>
           <li>
             <h3 className="text-lg font-semibold text-primary">Multi-Sport Fitness Camp</h3>
             <p className="text-gray-700">A diverse camp covering various sports and general fitness principles.</p>
-            <p className="text-sm text-gray-500">Date: August 21-25, 2023 | Ages: 10-16</p>
+            <p className="text-sm text-gray-500">Date: August 21-25, 2025 | Ages: 10-16</p>
           </li>
         </ul>
       </motion.section>

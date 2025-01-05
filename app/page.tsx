@@ -82,23 +82,21 @@ export default function Home() {
       <NewsTicker />
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          {heroImages.map((image, index) => (
-            <Image
-              key={index}
-              src={image}
-              alt="Sports Unlimited Hero"
-              fill
-              priority={index === 0}
-              className={`object-cover transition-opacity duration-1000 ${
-                currentImage === index ? 'opacity-100' : 'opacity-0'
-              }`}
-            />
-          ))}
-          <div className="absolute inset-0 bg-blue-900/30"></div>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute w-full h-full object-cover"
+          >
+            <source src="/videos/front_video.MOV" type="video/quicktime" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="absolute inset-0 bg-black/30"></div>
         </div>
         <div className="relative z-10 text-center text-white px-4 max-w-3xl mx-auto">
           <motion.h1 
-            className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6"
+            className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 drop-shadow-[0_5px_5px_rgba(0,0,0,0.7)] [text-shadow:_2px_2px_10px_rgb(0_0_0_/_70%)]"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -106,7 +104,7 @@ export default function Home() {
             We Play Hard
           </motion.h1>
           <motion.p 
-            className="text-xl sm:text-2xl md:text-3xl mb-8"
+            className="text-xl sm:text-2xl md:text-3xl mb-8 drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] [text-shadow:_1px_1px_8px_rgb(0_0_0_/_60%)]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -118,7 +116,10 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <Link href="/tournaments" className="bg-secondary text-accent px-6 py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-opacity-90 transition-colors duration-300 inline-block">
+            <Link 
+              href="/tournaments" 
+              className="bg-secondary text-accent px-6 py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-opacity-90 transition-colors duration-300 inline-block drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]"
+            >
               Explore Programs
             </Link>
           </motion.div>
@@ -192,39 +193,58 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-10 sm:py-12 md:py-16 px-4 bg-black/90 text-accent">
+      <section className="py-10 sm:py-12 md:py-16 px-4 bg-black text-accent">
         <div className="container mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">Ready to Play Hard?</h2>
           <p className="text-base sm:text-lg md:text-xl mb-6">Tap the basketball to see how excited we are to have you!</p>
-          <motion.div
-            className="inline-block cursor-pointer relative bg-white/10 p-4 rounded-full"
-            whileHover={{ scale: 1.1, rotate: 10 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={handleBounce}
-            animate={bounceCount > 0 ? {
-              y: [0, -100, 0],
-              rotate: [0, 360, 720],
-              transition: {
-                duration: 1,
-                ease: "easeOut",
-              }
-            } : {}}
-          >
-            <div className="absolute -inset-4 rounded-full bg-white/20 blur-lg transform translate-y-2"></div>
-            <div className="relative z-10 w-[120px] h-[120px] bg-white/10 rounded-full overflow-hidden">
-              <Image
-                src="/images/basketball.jpg"
-                alt="Basketball"
-                width={120}
-                height={120}
-                className="w-full h-full object-contain"
-                priority
-                loading="eager"
-                quality={100}
-                style={{ filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.3))' }}
-              />
-            </div>
-          </motion.div>
+          <div className="relative h-[200px] flex items-center justify-center">
+            <motion.div
+              className="absolute bottom-0 bg-white/20 h-2 w-[80px] rounded-full"
+              animate={bounceCount > 0 ? {
+                width: ["80px", "40px", "80px"],
+                opacity: [0.2, 0.5, 0.2],
+                x: "-50%",
+              } : {}}
+              style={{ left: "50%" }}
+              transition={{ duration: 1, ease: "easeOut" }}
+            />
+            <motion.div
+              className="inline-block cursor-pointer absolute bottom-0"
+              whileHover={{ scale: 1.1, rotate: 10 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={handleBounce}
+              animate={bounceCount > 0 ? {
+                y: [0, -120, 0],
+                scaleY: [1, 1.1, 0.8, 1],
+                scaleX: [1, 0.9, 1.1, 1],
+                rotate: [0, 360, 720],
+                transition: {
+                  duration: 1,
+                  ease: "easeOut",
+                  times: [0, 0.5, 1],
+                  scaleY: {
+                    times: [0, 0.4, 0.7, 1]
+                  },
+                  scaleX: {
+                    times: [0, 0.4, 0.7, 1]
+                  }
+                }
+              } : {}}
+            >
+              <div className="relative z-10 w-[120px] h-[120px] rounded-full overflow-hidden">
+                <Image
+                  src="/images/basketball.jpg"
+                  alt="Basketball"
+                  width={120}
+                  height={120}
+                  className="w-full h-full object-contain"
+                  priority
+                  loading="eager"
+                  quality={100}
+                />
+              </div>
+            </motion.div>
+          </div>
           <motion.p 
             className="mt-4 text-xl sm:text-2xl font-bold"
             animate={bounceCount > 0 ? { scale: [1, 1.2, 1] } : {}}
@@ -265,9 +285,9 @@ export default function Home() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8">Upcoming Events</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[
-              { title: "Summer Basketball Camp", date: "July 15-20, 2023" },
-              { title: "Soccer Skills Workshop", date: "August 5-7, 2023" },
-              { title: "Fall Sports Open House", date: "September 1, 2023" }
+              { title: "Summer Basketball Camp", date: "July 15-20, 2025" },
+              { title: "Soccer Skills Workshop", date: "August 5-7, 2025" },
+              { title: "Fall Sports Open House", date: "September 1, 2025" }
             ].map((event, index) => (
               <motion.div
                 key={index}
