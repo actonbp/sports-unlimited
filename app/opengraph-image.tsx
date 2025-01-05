@@ -34,7 +34,7 @@ export default async function Image() {
           }}
         >
           <img
-            src={`${process.env.VERCEL_URL}/images/basketball.jpg`}
+            src={`https://sports-unlimited.vercel.app/images/basketball.jpg`}
             alt="Basketball"
             width="120"
             height="120"
