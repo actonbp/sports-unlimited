@@ -79,8 +79,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
-      <NewsTicker />
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <video
             autoPlay
@@ -125,12 +124,13 @@ export default function Home() {
           </motion.div>
         </div>
         <motion.div 
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-16 left-1/2 transform -translate-x-1/2"
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
         >
           <ChevronDown size={32} className="text-accent" />
         </motion.div>
+        <NewsTicker />
       </section>
 
       <section className="py-10 sm:py-12 md:py-16 px-4 bg-accent">

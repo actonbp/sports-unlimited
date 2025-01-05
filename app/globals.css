@@ -3,10 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #0E4C92;  /* Deep Blue */
-  --color-secondary: #D22B2B;  /* Bright Red */
-  --color-accent: #FFFFFF;  /* White */
-  --color-background: #F0F8FF;  /* Light Blue Background */
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
 body {
@@ -36,5 +35,22 @@ body {
 
 .bg-accent {
   background-color: var(--color-accent);
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker 30s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
 }
 

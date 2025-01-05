@@ -47,27 +47,30 @@ export default function NewsTicker() {
 
   return (
     <div 
-      className="bg-primary text-white py-3 relative overflow-hidden"
+      className="bg-black/80 text-white py-1.5 absolute bottom-0 left-0 right-0 z-20 border-t border-gray-700"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center">
-          <span className="font-bold mr-3 whitespace-nowrap">Breaking News:</span>
-          <div className="flex-1 overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -50, opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className="flex items-center"
-              >
-                <span className="mr-2 flex-shrink-0">{newsItems[currentIndex].icon}</span>
-                <span className="text-sm md:text-base">{newsItems[currentIndex].text}</span>
-              </motion.div>
-            </AnimatePresence>
+      <div className="relative flex items-center">
+        <div className="flex-shrink-0 bg-red-600 px-4 py-1 font-bold tracking-wider text-sm border-r border-gray-700">
+          UPDATES
+        </div>
+        <div className="flex-1 overflow-hidden">
+          <div className="animate-ticker inline-flex items-center whitespace-nowrap">
+            {[...Array(2)].map((_, arrayIndex) => (
+              <div key={arrayIndex} className="inline-flex items-center">
+                {newsItems.map((item, index) => (
+                  <div
+                    key={`${arrayIndex}-${index}`}
+                    className="inline-flex items-center px-4 space-x-2"
+                  >
+                    <span className="flex-shrink-0">{item.icon}</span>
+                    <span className="text-sm font-medium">{item.text}</span>
+                    <span className="text-gray-400 mx-2">•</span>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </div>
