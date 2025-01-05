@@ -93,7 +93,7 @@ export default function TournamentsPage() {
         case 'name':
           return a.name.localeCompare(b.name)
         case 'ageGroup':
-          return a.ageGroup.localeCompare(b.ageGroup)
+          return a.ageGroup[0].localeCompare(b.ageGroup[0])
         default:
           return 0
       }
