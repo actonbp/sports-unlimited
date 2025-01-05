@@ -12,18 +12,22 @@ export default function WaitlistPopup() {
   })
   const [submitted, setSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [errors, setErrors] = useState<{ [key: string]: string }>({})
+  const [errors, setErrors] = useState<Record<string, string>>({})
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }))
+      setErrors(prev => {
+        const newErrors = { ...prev }
+        delete newErrors[name]
+        return newErrors
+      })
     }
   }
 
   const validateForm = (): boolean => {
-    const newErrors: { [key: string]: string } = {}
+    const newErrors: Record<string, string> = {}
     
     if (!formData.firstName) newErrors.firstName = 'First name is required'
     if (!formData.phone) {
