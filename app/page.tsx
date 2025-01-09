@@ -95,7 +95,7 @@ export default function Home() {
 
         <div className="relative z-10 text-center text-white px-4 max-w-3xl mx-auto flex flex-col justify-center items-center min-h-screen">
           <motion.h1 
-            className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 drop-shadow-[0_5px_5px_rgba(0,0,0,0.7)] [text-shadow:_2px_2px_10px_rgb(0_0_0_/_70%)]"
+            className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 drop-shadow-[0_5px_5px_rgba(0,0,0,0.7)] text-white [text-shadow:_2px_2px_10px_rgb(0_0_0_/_70%)]"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -117,7 +117,7 @@ export default function Home() {
           >
             <Link 
               href="/tournaments" 
-              className="bg-secondary text-white px-6 py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-opacity-90 transition-colors duration-300 inline-block drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]"
+              className="bg-gradient hover:opacity-90 text-white px-6 py-3 rounded-full text-base sm:text-lg font-semibold transition-all duration-300 inline-block drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]"
             >
               Explore Tournaments
             </Link>
