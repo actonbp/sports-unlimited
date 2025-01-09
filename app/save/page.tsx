@@ -98,6 +98,33 @@ export default function SaveSportsPage() {
                     </div>
                 </div>
 
+                {/* Contact Information Banner */}
+                <div className="bg-[#D21312] py-6">
+                    <div className="container mx-auto px-4">
+                        <div className="text-center text-white">
+                            <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
+                            <p className="text-lg mb-2">
+                                Coach Dorsette @ 919-478-7954
+                            </p>
+                            <p className="text-lg">
+                                Email: savesportsbball@gmail.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Tryout Location Banner */}
+                <div className="bg-black py-6 border-t border-b border-[#D21312]">
+                    <div className="container mx-auto px-4">
+                        <div className="text-center text-white">
+                            <h2 className="text-2xl font-bold mb-4">Tryout Location</h2>
+                            <p className="text-xl">
+                                909 Liberty St. Durham NC
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Tryout Schedule Section */}
                 <div className="bg-[#1a1a1a] py-16">
                     <div className="container mx-auto px-4">
@@ -184,8 +211,13 @@ export default function SaveSportsPage() {
                             transition={{ duration: 0.6 }}
                         >
                             <h2 className="text-3xl font-bold mb-4">Join SAVE Sports</h2>
-                            <p className="text-xl mb-8 text-gray-300">
+                            <p className="text-xl mb-4 text-gray-300">
                                 Take the first step towards becoming a better athlete and leader.
+                            </p>
+                            <p className="text-lg mb-6 text-white">
+                                Contact Coach Dorsette:<br />
+                                Phone: 919-478-7954<br />
+                                Email: savesportsbball@gmail.com
                             </p>
                             <Link href="/contact" className="bg-[#D21312] text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-[#b30f0f] transition-colors duration-300 inline-block">
                                 Contact Us

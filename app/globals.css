@@ -7,11 +7,36 @@
   --color-secondary: #D21312;
   --color-accent: #FFFFFF;
   --color-background: #F8F9FA;
+  --color-light-blue: #4A90E2;
 }
 
 body {
   background-color: var(--color-background);
-  color: #333;
+  color: var(--color-primary);
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, var(--color-primary), var(--color-light-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-gradient {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-light-blue));
+}
+
+.hover-light-blue:hover {
+  color: var(--color-light-blue);
+  transition: color 0.3s ease;
+}
+
+.border-light-blue {
+  border-color: var(--color-light-blue);
+}
+
+.text-light-blue {
+  color: var(--color-light-blue);
 }
 
 @keyframes ticker {

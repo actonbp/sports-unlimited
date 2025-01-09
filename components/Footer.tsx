@@ -11,10 +11,10 @@ const navItems = [
 ]
 
 const socialLinks = [
-  { name: 'Facebook', icon: Facebook, href: '#' },
-  { name: 'Instagram', icon: Instagram, href: '#' },
-  { name: 'Twitter', icon: Twitter, href: '#' },
-  { name: 'YouTube', icon: Youtube, href: '#' },
+  { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/sportsunlimitednc' },
+  { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/sportsunlimitednc' },
+  { name: 'X', icon: Twitter, href: 'https://x.com/sportsunlimitednc' },
+  { name: 'YouTube', icon: Youtube, href: 'https://youtube.com/@sportsunlimitednc' },
 ]
 
 export default function Footer() {
@@ -36,10 +36,11 @@ export default function Footer() {
           </div>
           <div>
             <h3 className="text-2xl font-bold mb-4">Contact Us</h3>
-            <p>123 Main Street</p>
-            <p>Durham, NC 27701</p>
-            <p>Phone: (919) 555-0123</p>
-            <p>Email: info@sportsunlimited.com</p>
+            <p>1010 Martin Luther King Jr Pkwy</p>
+            <p>Suite 300</p>
+            <p>Durham, NC 27713</p>
+            <p>Phone: 919-478-7954</p>
+            <p>Email: sportsunlimited919@gmail.com</p>
           </div>
           <div>
             <h3 className="text-2xl font-bold mb-4">Follow Us</h3>

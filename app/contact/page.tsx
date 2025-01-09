@@ -75,6 +75,32 @@ export default function ContactPage() {
       </motion.p>
 
       <motion.div 
+        className="max-w-2xl mx-auto mb-12 bg-primary/5 p-8 rounded-lg"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold mb-6 text-primary">Our Contact Information</h2>
+          <div className="space-y-3">
+            <p className="text-gray-700">
+              <strong>Address:</strong><br />
+              1010 Martin Luther King Jr Pkwy Suite 300<br />
+              Durham, NC 27713
+            </p>
+            <p className="text-gray-700">
+              <strong>Phone:</strong><br />
+              919-478-7954
+            </p>
+            <p className="text-gray-700">
+              <strong>Email:</strong><br />
+              sportsunlimited919@gmail.com
+            </p>
+          </div>
+        </div>
+      </motion.div>
+
+      <motion.div 
         className="max-w-2xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
