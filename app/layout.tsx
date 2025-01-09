@@ -7,17 +7,17 @@ import { Metadata } from 'next'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Sports Unlimited - Building Community Through Sports',
-  description: 'Join exciting sports tournaments in Durham and showcase your skills! Our events bring together young athletes from across the Triangle area for friendly competition and community building.',
-  metadataBase: new URL('https://sports-unlimited.vercel.app'),
+  title: 'Sports Unlimited',
+  description: 'Building Community Through Sports',
+  metadataBase: new URL('https://savesportsnc.com'),
   openGraph: {
-    title: 'Sports Unlimited - Building Community Through Sports',
-    description: 'Join exciting sports tournaments in Durham and showcase your skills! Our events bring together young athletes from across the Triangle area.',
-    url: 'https://sports-unlimited.vercel.app',
+    title: 'Sports Unlimited',
+    description: 'Building Community Through Sports',
+    url: 'https://savesportsnc.com',
     siteName: 'Sports Unlimited',
     images: [
       {
-        url: 'https://sports-unlimited.vercel.app/opengraph-image',
+        url: '/images/slides_image-2.jpg',
         width: 1200,
         height: 630,
         alt: 'Sports Unlimited - Building Community Through Sports',
@@ -28,10 +28,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sports Unlimited - Building Community Through Sports',
-    description: 'Join exciting sports tournaments in Durham and showcase your skills! Our events bring together young athletes from across the Triangle area.',
-    images: ['https://sports-unlimited.vercel.app/twitter-image'],
-    creator: '@SportsUnlimited',
+    title: 'Sports Unlimited',
+    description: 'Building Community Through Sports',
+    images: ['/images/slides_image-2.jpg'],
   },
   other: {
     'apple-mobile-web-app-capable': 'yes',
