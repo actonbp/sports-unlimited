@@ -23,88 +23,95 @@ export default async function Image() {
           alignItems: 'center',
           justifyContent: 'center',
           padding: '40px',
+          position: 'relative',
         }}
       >
+        {/* Background Image */}
         <div
           style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundImage: 'url(/images/slides_image-2.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.4,
+          }}
+        />
+        
+        {/* Content Overlay */}
+        <div
+          style={{
+            position: 'relative',
+            zIndex: 1,
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '20px',
+            gap: '16px',
+            backgroundColor: 'rgba(11, 36, 71, 0.85)',
+            padding: '40px',
+            borderRadius: '20px',
           }}
         >
-          <img
-            src={`https://sports-unlimited.vercel.app/images/basketball.jpg`}
-            alt="Basketball"
-            width="120"
-            height="120"
+          <h1
             style={{
-              borderRadius: '60px',
-              marginRight: '20px',
+              fontSize: '72px',
+              fontWeight: 'bold',
+              color: 'white',
+              textAlign: 'center',
+              margin: 0,
+              lineHeight: 1.1,
+              textShadow: '2px 2px 8px rgba(0,0,0,0.3)',
             }}
-          />
-        </div>
-        <h1
-          style={{
-            fontSize: '60px',
-            fontWeight: 'bold',
-            color: 'white',
-            textAlign: 'center',
-            marginBottom: '20px',
-            textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
-          }}
-        >
-          Sports Unlimited
-        </h1>
-        <p
-          style={{
-            fontSize: '32px',
-            color: 'white',
-            textAlign: 'center',
-            opacity: 0.9,
-            maxWidth: '800px',
-          }}
-        >
-          Join our community of young athletes in Durham
-        </p>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: '40px',
-            gap: '20px',
-          }}
-        >
+          >
+            Sports Unlimited
+          </h1>
+          
+          <p
+            style={{
+              fontSize: '36px',
+              color: 'white',
+              textAlign: 'center',
+              opacity: 0.9,
+              margin: 0,
+              maxWidth: '800px',
+              textShadow: '1px 1px 4px rgba(0,0,0,0.2)',
+            }}
+          >
+            Building Community Through Sports
+          </p>
+
           <div
             style={{
+              marginTop: '20px',
               background: '#D21312',
               color: 'white',
-              padding: '12px 24px',
-              borderRadius: '24px',
-              fontSize: '24px',
+              padding: '16px 32px',
+              borderRadius: '30px',
+              fontSize: '28px',
               fontWeight: 'bold',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
             }}
           >
-            #SportsUnlimited
-          </div>
-          <div
-            style={{
-              background: 'white',
-              color: '#0B2447',
-              padding: '12px 24px',
-              borderRadius: '24px',
-              fontSize: '24px',
-              fontWeight: 'bold',
-            }}
-          >
-            @SportsUnlimited
+            Join Our Community
           </div>
         </div>
       </div>
     ),
     {
       ...size,
+      fonts: [
+        {
+          name: 'Inter',
+          data: await fetch(
+            new URL('https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYAZ9hiA.woff2')
+          ).then((res) => res.arrayBuffer()),
+          weight: 700,
+          style: 'normal',
+        },
+      ],
     }
   )
 } 

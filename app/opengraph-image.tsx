@@ -26,7 +26,7 @@ export default async function Image() {
           position: 'relative',
         }}
       >
-        {/* Background pattern */}
+        {/* Background Image */}
         <div
           style={{
             position: 'absolute',
@@ -34,40 +34,25 @@ export default async function Image() {
             left: 0,
             right: 0,
             bottom: 0,
-            opacity: 0.1,
-            backgroundImage: 'radial-gradient(circle at 25px 25px, white 2%, transparent 0%)',
-            backgroundSize: '50px 50px',
+            backgroundImage: 'url(/images/slides_image-2.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.4,
           }}
         />
         
-        {/* Logo/Image */}
+        {/* Content Overlay */}
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '30px',
-            filter: 'drop-shadow(0px 4px 8px rgba(0,0,0,0.3))',
-          }}
-        >
-          <img
-            src={`https://sports-unlimited.vercel.app/images/basketball.jpg`}
-            alt="Basketball"
-            width="150"
-            height="150"
-            style={{
-              borderRadius: '75px',
-            }}
-          />
-        </div>
-
-        {/* Title */}
-        <div
-          style={{
+            position: 'relative',
+            zIndex: 1,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             gap: '16px',
+            backgroundColor: 'rgba(11, 36, 71, 0.85)',
+            padding: '40px',
+            borderRadius: '20px',
           }}
         >
           <h1
@@ -97,22 +82,21 @@ export default async function Image() {
           >
             Building Community Through Sports
           </p>
-        </div>
 
-        {/* Call to action */}
-        <div
-          style={{
-            marginTop: '40px',
-            background: '#D21312',
-            color: 'white',
-            padding: '16px 32px',
-            borderRadius: '30px',
-            fontSize: '28px',
-            fontWeight: 'bold',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-          }}
-        >
-          Join Our Community
+          <div
+            style={{
+              marginTop: '20px',
+              background: '#D21312',
+              color: 'white',
+              padding: '16px 32px',
+              borderRadius: '30px',
+              fontSize: '28px',
+              fontWeight: 'bold',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+            }}
+          >
+            Join Our Community
+          </div>
         </div>
       </div>
     ),
