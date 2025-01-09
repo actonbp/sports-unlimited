@@ -137,15 +137,6 @@ export default function SaveSportsPage() {
                                     <p className="text-gray-300">909 Liberty Street</p>
                                 </div>
                             </div>
-
-                            <div className="text-center mt-8">
-                                <Link 
-                                    href="/contact" 
-                                    className="bg-[#D21312] text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-[#b30f0f] transition-colors duration-300 inline-block"
-                                >
-                                    Register for Tryouts
-                                </Link>
-                            </div>
                         </motion.div>
                     </div>
                 </div>
