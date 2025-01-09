@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Shield, Heart, Users, ChevronDown, ChevronUp, Trophy } from 'lucide-react'
+import Image from 'next/image'
 
 const initiatives = [
     {
@@ -44,6 +45,61 @@ export default function SaveSportsPage() {
                 >
                     Sports Against Violence Everywhere
                 </motion.h2>
+            </div>
+
+            <div className="bg-black py-16 px-4">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid md:grid-cols-2 gap-8 items-center">
+                        <motion.div 
+                            className="flex flex-col items-center space-y-8"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5 }}
+                        >
+                            <div className="relative w-64 h-64">
+                                <Image
+                                    src="/images/logos/save_logo.PNG"
+                                    alt="SAVE Sports Logo"
+                                    fill
+                                    className="object-contain"
+                                    priority
+                                />
+                            </div>
+                            <div className="text-white text-center text-4xl font-bold">×</div>
+                            <div className="relative w-48 h-48">
+                                <Image
+                                    src="/images/logos/NXT_logo.JPEG"
+                                    alt="PUMA NXT Circuit Logo"
+                                    fill
+                                    className="object-contain"
+                                    priority
+                                />
+                            </div>
+                        </motion.div>
+
+                        <motion.div
+                            className="bg-white p-8 rounded-lg shadow-xl"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                        >
+                            <h2 className="text-4xl font-bold mb-6 text-[#0B4F94]">Breaking News!</h2>
+                            <div className="space-y-4">
+                                <p className="text-2xl font-semibold text-gray-800">
+                                    SAVE Sports is proud to announce our official partnership with the prestigious PUMA NXT Circuit!
+                                </p>
+                                <p className="text-lg text-gray-600">
+                                    This exciting collaboration marks a significant milestone in our journey, elevating our program to new heights and providing our athletes with unprecedented opportunities to compete at the highest level.
+                                </p>
+                                <div className="pt-4">
+                                    <button className="bg-[#0B4F94] text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-colors duration-200">
+                                        Learn More
+                                    </button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
             </div>
 
             <div className="container mx-auto px-4">

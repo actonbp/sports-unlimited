@@ -40,9 +40,9 @@ const carouselImages = [
 ]
 
 export default function Home() {
-  const [bounceCount, setBounceCount] = useState(0)
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const [currentImage, setCurrentImage] = useState(0)
+  const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [bounceCount, setBounceCount] = useState(0)
 
   const testimonials = [
     { name: "Sarah J.", age: 14, quote: "Sports Unlimited changed my life. I've made new friends and improved my basketball skills!" },
@@ -78,22 +78,22 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <section className="relative h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
+    <div>
+      <section className="relative min-h-screen bg-black">
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
           <video
             autoPlay
             muted
             loop
             playsInline
-            className="absolute w-full h-full object-cover"
+            className="w-full h-full object-cover"
           >
             <source src="/videos/front_video.MOV" type="video/quicktime" />
-            Your browser does not support the video tag.
           </video>
-          <div className="absolute inset-0 bg-black/30"></div>
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
-        <div className="relative z-10 text-center text-white px-4 max-w-3xl mx-auto">
+
+        <div className="relative z-10 text-center text-white px-4 max-w-3xl mx-auto flex flex-col justify-center items-center min-h-screen">
           <motion.h1 
             className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 drop-shadow-[0_5px_5px_rgba(0,0,0,0.7)] [text-shadow:_2px_2px_10px_rgb(0_0_0_/_70%)]"
             initial={{ opacity: 0, y: -50 }}
@@ -117,9 +117,9 @@ export default function Home() {
           >
             <Link 
               href="/tournaments" 
-              className="bg-secondary text-accent px-6 py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-opacity-90 transition-colors duration-300 inline-block drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]"
+              className="bg-secondary text-white px-6 py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-opacity-90 transition-colors duration-300 inline-block drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]"
             >
-              Explore Programs
+              Explore Tournaments
             </Link>
           </motion.div>
         </div>
@@ -128,75 +128,15 @@ export default function Home() {
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
         >
-          <ChevronDown size={32} className="text-accent" />
+          <ChevronDown size={32} className="text-white" />
         </motion.div>
         <NewsTicker />
       </section>
 
-      <section className="py-10 sm:py-12 md:py-16 px-4 bg-accent">
-        <div className="container mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-8 md:mb-10 text-primary">Sports in Action</h2>
-          <div className="relative w-full max-w-lg mx-auto h-[250px] sm:h-[300px] md:h-[350px] overflow-hidden rounded-lg shadow-xl">
-            <AnimatePresence initial={false}>
-              <motion.img
-                key={currentImage}
-                src={carouselImages[currentImage].src}
-                alt={carouselImages[currentImage].alt}
-                className="absolute w-full h-full object-cover"
-                initial={{ opacity: 0, x: 300 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -300 }}
-                transition={{ duration: 0.5 }}
-              />
-            </AnimatePresence>
-            <button
-              onClick={prevImage}
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-full"
-              aria-label="Previous image"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button
-              onClick={nextImage}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-full"
-              aria-label="Next image"
-            >
-              <ChevronRight size={24} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-10 sm:py-12 md:py-16 px-4 bg-background">
-        <div className="container mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-8 md:mb-10 text-primary">Why Choose Sports Unlimited?</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {[
-              { icon: Star, title: "Expert Coaching", description: "Learn from Durham's best coaches who are passionate about youth development" },
-              { icon: Users, title: "Team Building", description: "Develop lifelong friendships and essential teamwork skills" },
-              { icon: Calendar, title: "Year-round Programs", description: "Stay active all year with our diverse range of sports programs" }
-            ].map((item, index) => (
-              <motion.div 
-                key={index}
-                className="bg-white p-6 rounded-lg shadow-lg text-center"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                whileHover={{ scale: 1.03 }}
-              >
-                <item.icon size={40} className="mx-auto mb-4 text-secondary" />
-                <h3 className="text-lg font-semibold mb-2 text-primary">{item.title}</h3>
-                <p className="text-sm text-gray-700">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-10 sm:py-12 md:py-16 px-4 bg-black text-accent">
+      <section className="py-10 sm:py-12 md:py-16 px-4 bg-black text-white">
         <div className="container mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">Ready to Play Hard?</h2>
-          <p className="text-base sm:text-lg md:text-xl mb-6">Tap the basketball to see how excited we are to have you!</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-white">Ready to Play Hard?</h2>
+          <p className="text-base sm:text-lg md:text-xl mb-6 text-white/90">Tap the basketball to see how excited we are to have you!</p>
           <div className="relative h-[200px] flex items-center justify-center">
             <motion.div
               className="absolute bottom-0 bg-white/20 h-2 w-[80px] rounded-full"
@@ -246,43 +186,50 @@ export default function Home() {
             </motion.div>
           </div>
           <motion.p 
-            className="mt-4 text-xl sm:text-2xl font-bold"
+            className="mt-4 text-xl sm:text-2xl font-bold text-white"
             animate={bounceCount > 0 ? { scale: [1, 1.2, 1] } : {}}
             transition={{ duration: 0.5 }}
           >
             Bounces: {bounceCount}
           </motion.p>
-          <Link href="/registration" className="mt-6 inline-block bg-secondary text-accent px-6 py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-opacity-90 transition-colors duration-300">
+          <Link 
+            href="/registration" 
+            className="mt-6 inline-block bg-white text-black px-6 py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-opacity-90 transition-colors duration-300 hover:scale-105 transform"
+          >
             Sign Up Now
           </Link>
         </div>
       </section>
 
-      <section className="py-10 sm:py-12 md:py-16 px-4 bg-background">
+      <section className="py-10 sm:py-12 md:py-16 px-4 bg-primary text-white">
         <div className="container mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-8 md:mb-10 text-primary">What Our Athletes Say</h2>
-          <div className="relative h-48">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-8 md:mb-10 text-white">Why Choose Sports Unlimited?</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {[
+              { icon: Star, title: "Expert Coaching", description: "Learn from Durham's best coaches who are passionate about youth development" },
+              { icon: Users, title: "Team Building", description: "Develop lifelong friendships and essential teamwork skills" },
+              { icon: Calendar, title: "Year-round Programs", description: "Stay active all year with our diverse range of sports programs" }
+            ].map((item, index) => (
+              <motion.div 
                 key={index}
-                className="absolute w-full"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: currentTestimonial === index ? 1 : 0 }}
-                transition={{ duration: 0.5 }}
+                className="bg-white/10 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform duration-200"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                whileHover={{ scale: 1.03 }}
               >
-                <blockquote className="text-center">
-                  <p className="text-base sm:text-lg md:text-xl mb-4 text-gray-700 italic">"{testimonial.quote}"</p>
-                  <footer className="text-primary font-semibold text-sm sm:text-base">{testimonial.name}, age {testimonial.age}</footer>
-                </blockquote>
+                <item.icon size={40} className="mx-auto mb-4 text-white" />
+                <h3 className="text-lg font-semibold mb-2 text-white">{item.title}</h3>
+                <p className="text-white/90">{item.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-10 sm:py-12 md:py-16 px-4 bg-secondary text-accent">
+      <section className="py-10 sm:py-12 md:py-16 px-4 bg-secondary text-white">
         <div className="container mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8">Upcoming Events</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-white">Upcoming Events</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[
               { title: "Summer Basketball Camp", date: "July 15-20, 2025" },
@@ -291,17 +238,20 @@ export default function Home() {
             ].map((event, index) => (
               <motion.div
                 key={index}
-                className="bg-accent text-primary p-4 sm:p-6 rounded-lg shadow-lg"
+                className="bg-white/10 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-200"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
               >
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">{event.title}</h3>
-                <p className="text-sm text-gray-700">{event.date}</p>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white">{event.title}</h3>
+                <p className="text-white/80">{event.date}</p>
               </motion.div>
             ))}
           </div>
-          <Link href="/events" className="mt-6 sm:mt-8 inline-block bg-accent text-secondary px-6 py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-opacity-90 transition-colors duration-300">
+          <Link 
+            href="/events" 
+            className="mt-8 inline-block bg-white text-secondary px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 hover:scale-105 transform shadow-lg"
+          >
             View All Events
           </Link>
         </div>
