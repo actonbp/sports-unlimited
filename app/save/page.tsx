@@ -122,10 +122,6 @@ export default function SaveSportsPage() {
                                 909 Liberty Street<br />
                                 Durham, NC
                             </p>
-                            <p className="text-lg text-[#D21312] mt-4">
-                                Registration Fee: $140<br />
-                                <span className="text-gray-300">(Pay in person)</span>
-                            </p>
                         </div>
                     </div>
                 </div>

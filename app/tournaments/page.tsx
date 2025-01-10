@@ -137,6 +137,19 @@ export default function TournamentsPage() {
         </div>
       </section>
 
+      {/* Registration Fee Info */}
+      <div className="bg-secondary/10 py-6">
+        <div className="container mx-auto px-4 text-center">
+          <div className="inline-block bg-white rounded-lg shadow-lg p-6">
+            <h2 className="text-xl font-bold text-primary mb-2">Tournament Registration Fee</h2>
+            <p className="text-lg">
+              <span className="font-semibold text-secondary">$140</span>
+              <span className="text-gray-600 ml-2">(Pay in person)</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Tournament Schedule */}
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto space-y-4">
@@ -172,10 +185,10 @@ export default function TournamentsPage() {
                       </div>
                     </div>
                     <button 
-                      className="mt-4 md:mt-0 bg-gray-200 text-gray-800 py-2 px-6 rounded-full hover:bg-gray-300 transition-colors duration-200 flex items-center justify-center space-x-2 cursor-not-allowed"
+                      className="mt-4 md:mt-0 bg-secondary text-white py-2 px-6 rounded-full hover:bg-secondary/90 transition-colors duration-200 flex items-center justify-center space-x-2"
                     >
                       <Trophy className="w-5 h-5" />
-                      <span>Registration Opening Soon</span>
+                      <span>Register Now - $140</span>
                     </button>
                   </div>
                 </div>
