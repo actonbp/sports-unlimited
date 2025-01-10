@@ -188,7 +188,7 @@ export default function TournamentsPage() {
                       className="mt-4 md:mt-0 bg-secondary text-white py-2 px-6 rounded-full hover:bg-secondary/90 transition-colors duration-200 flex items-center justify-center space-x-2"
                     >
                       <Trophy className="w-5 h-5" />
-                      <span>Online Registration Closed<br />Register in Person</span>
+                      <span>Register in Person<br />or Contact Coach Dorsette</span>
                     </button>
                   </div>
                 </div>
