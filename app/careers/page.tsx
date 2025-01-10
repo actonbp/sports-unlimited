@@ -57,37 +57,31 @@ export default function CareersPage() {
         Be part of our mission to empower youth through sports. Explore our current job openings and internship opportunities.
       </motion.p>
 
-      <motion.div
-        className="mb-12 text-center"
+      <motion.div 
+        className="mb-16 text-center"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
-        <div className="bg-primary/90 p-8 rounded-lg shadow-lg inline-block">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">COMING SOON!</h2>
-          <p className="text-white/90 text-xl">Stay Tuned for Exciting Opportunities</p>
+        <div className="bg-primary/90 p-12 rounded-lg shadow-lg inline-block max-w-3xl w-full">
+          <h2 className="text-6xl md:text-7xl font-bold text-white mb-4">COMING SOON!</h2>
+          <p className="text-white/90 text-2xl md:text-3xl mb-8">Stay Tuned for Exciting Opportunities</p>
+          <div className="text-white text-xl">
+            <p className="font-semibold mb-2">Contact:</p>
+            <p>Coach Dorsette</p>
+            <p>919-478-7954</p>
+            <p>savesportsbball@gmail.com</p>
+          </div>
         </div>
       </motion.div>
 
-      <div className="space-y-8 relative min-h-[600px]">
-        <div className="absolute inset-0 backdrop-blur-[2px] bg-white/10 z-10 flex items-center justify-center">
-          <div className="text-center bg-primary/85 p-12 rounded-lg shadow-lg max-w-3xl w-full mx-4">
-            <h2 className="text-6xl md:text-7xl font-bold text-white mb-4">COMING SOON!</h2>
-            <p className="text-white/90 text-2xl md:text-3xl mb-8">Stay Tuned for Exciting Opportunities</p>
-            <div className="text-white text-xl">
-              <p className="font-semibold mb-2">Contact:</p>
-              <p>Coach Dorsette</p>
-              <p>919-478-7954</p>
-              <p>savesportsbball@gmail.com</p>
-            </div>
-          </div>
-        </div>
+      <div className="space-y-8 filter blur-[3px] opacity-50">
         {jobOpenings.map((job, index) => (
           <motion.div 
             key={job.title}
-            className="bg-white p-6 rounded-lg shadow-md"
+            className="bg-white/80 p-6 rounded-lg shadow-md"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 0.5, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
           >
             <h2 className="text-2xl font-semibold mb-4 text-primary">{job.title}</h2>
@@ -109,9 +103,9 @@ export default function CareersPage() {
       </div>
 
       <motion.div
-        className="mt-12 text-center"
+        className="mt-12 text-center filter blur-[3px] opacity-50"
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 0.5, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
       >
         <h2 className="text-2xl font-semibold mb-4 text-primary">Ready to Make a Difference?</h2>
