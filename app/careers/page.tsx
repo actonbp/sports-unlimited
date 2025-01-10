@@ -57,7 +57,31 @@ export default function CareersPage() {
         Be part of our mission to empower youth through sports. Explore our current job openings and internship opportunities.
       </motion.p>
 
-      <div className="space-y-8">
+      <motion.div
+        className="mb-12 text-center"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
+        <div className="bg-primary/90 p-8 rounded-lg shadow-lg inline-block">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">COMING SOON!</h2>
+          <p className="text-white/90 text-xl">Stay Tuned for Exciting Opportunities</p>
+        </div>
+      </motion.div>
+
+      <div className="space-y-8 relative min-h-[600px]">
+        <div className="absolute inset-0 backdrop-blur-[2px] bg-white/10 z-10 flex items-center justify-center">
+          <div className="text-center bg-primary/85 p-12 rounded-lg shadow-lg max-w-3xl w-full mx-4">
+            <h2 className="text-6xl md:text-7xl font-bold text-white mb-4">COMING SOON!</h2>
+            <p className="text-white/90 text-2xl md:text-3xl mb-8">Stay Tuned for Exciting Opportunities</p>
+            <div className="text-white text-xl">
+              <p className="font-semibold mb-2">Contact:</p>
+              <p>Coach Dorsette</p>
+              <p>919-478-7954</p>
+              <p>savesportsbball@gmail.com</p>
+            </div>
+          </div>
+        </div>
         {jobOpenings.map((job, index) => (
           <motion.div 
             key={job.title}
@@ -74,12 +98,12 @@ export default function CareersPage() {
                 <li key={i}>{req}</li>
               ))}
             </ul>
-            <Link 
-              href="/apply"
-              className="inline-block bg-secondary text-white py-2 px-4 rounded hover:bg-opacity-90 transition-colors duration-200"
+            <button 
+              disabled
+              className="inline-block bg-secondary text-white py-2 px-4 rounded hover:bg-opacity-90 transition-colors duration-200 opacity-75 cursor-not-allowed"
             >
-              Apply Now
-            </Link>
+              Coming Soon
+            </button>
           </motion.div>
         ))}
       </div>
@@ -94,9 +118,12 @@ export default function CareersPage() {
         <p className="text-gray-700 mb-6">
           If you're passionate about youth sports and want to contribute to our mission, we'd love to hear from you!
         </p>
-        <Link href="/join-our-team" className="bg-secondary text-white py-3 px-6 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-colors duration-200 inline-block">
-          Join Our Team
-        </Link>
+        <button 
+          disabled
+          className="bg-secondary text-white py-3 px-6 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-colors duration-200 inline-block opacity-75 cursor-not-allowed"
+        >
+          Coming Soon
+        </button>
       </motion.div>
     </div>
   )

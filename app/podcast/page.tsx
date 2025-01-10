@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Moon, Sun, Mic, Play, Pause } from 'lucide-react'
+import { Moon, Sun, Mic, Play } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -65,7 +65,6 @@ const podcastPlatforms: PodcastPlatform[] = [
 
 export default function PodcastPage() {
   const [darkMode, setDarkMode] = useState(false)
-  const [playing, setPlaying] = useState(false)
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
@@ -115,12 +114,11 @@ export default function PodcastPage() {
             </p>
             <div className="flex items-center justify-between">
               <button 
-                onClick={() => setPlaying(!playing)}
-                className="flex items-center bg-secondary text-white py-2 px-4 rounded hover:bg-opacity-90 transition-colors duration-200"
-                aria-label={playing ? "Pause episode" : "Play episode"}
+                className="flex items-center bg-secondary text-white py-2 px-4 rounded hover:bg-opacity-90 transition-colors duration-200 cursor-not-allowed opacity-75"
+                disabled
               >
-                {playing ? <Pause className="w-4 h-4 mr-2" /> : <Play className="w-4 h-4 mr-2" />}
-                {playing ? 'Pause' : 'Play'}
+                <Play className="w-4 h-4 mr-2" />
+                Coming Soon
               </button>
               <span>{podcastEpisodes[0].duration}</span>
             </div>
@@ -169,7 +167,7 @@ export default function PodcastPage() {
                 <h3 className="text-lg font-semibold">{episode.title}</h3>
                 <p className="text-sm mb-2">{episode.description}</p>
                 <div className="flex justify-between items-center">
-                  <button className="text-secondary hover:underline">Listen Now</button>
+                  <button className="text-secondary hover:underline cursor-not-allowed opacity-75">Coming Soon</button>
                   <span className="text-sm">{episode.duration}</span>
                 </div>
               </li>
