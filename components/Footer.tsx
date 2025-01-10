@@ -36,9 +36,8 @@ export default function Footer() {
           </div>
           <div>
             <h3 className="text-2xl font-bold mb-4">Contact Us</h3>
-            <p>1010 Martin Luther King Jr Pkwy</p>
-            <p>Suite 300</p>
-            <p>Durham, NC 27713</p>
+            <p>909 Liberty Street</p>
+            <p>Durham, NC 27701</p>
             <p>Phone: 919-478-7954</p>
             <p>Email: sportsunlimited919@gmail.com</p>
           </div>

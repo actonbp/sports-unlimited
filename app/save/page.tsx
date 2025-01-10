@@ -118,8 +118,13 @@ export default function SaveSportsPage() {
                     <div className="container mx-auto px-4">
                         <div className="text-center text-white">
                             <h2 className="text-2xl font-bold mb-4">Tryout Location</h2>
-                            <p className="text-xl">
-                                909 Liberty St. Durham NC
+                            <p className="text-xl mb-2">
+                                909 Liberty Street<br />
+                                Durham, NC
+                            </p>
+                            <p className="text-lg text-[#D21312] mt-4">
+                                Registration Fee: $140<br />
+                                <span className="text-gray-300">(Pay in person)</span>
                             </p>
                         </div>
                     </div>
@@ -140,28 +145,28 @@ export default function SaveSportsPage() {
                                     <h3 className="text-xl font-bold mb-3 text-[#D21312]">5th Grade Girls</h3>
                                     <p className="text-white mb-2">January 18</p>
                                     <p className="text-white mb-2">10am-12pm</p>
-                                    <p className="text-gray-300">909 Liberty Street</p>
+                                    <p className="text-gray-300">909 Liberty Street<br />Durham, NC</p>
                                 </div>
 
                                 <div className="bg-black p-6 rounded-lg border border-[#D21312]">
                                     <h3 className="text-xl font-bold mb-3 text-[#D21312]">8th Grade Boys</h3>
                                     <p className="text-white mb-2">January 19</p>
                                     <p className="text-white mb-2">1-2pm</p>
-                                    <p className="text-gray-300">909 Liberty Street</p>
+                                    <p className="text-gray-300">909 Liberty Street<br />Durham, NC</p>
                                 </div>
 
                                 <div className="bg-black p-6 rounded-lg border border-[#D21312]">
                                     <h3 className="text-xl font-bold mb-3 text-[#D21312]">15U, 16U, 17U</h3>
                                     <p className="text-white mb-2">January 19</p>
                                     <p className="text-white mb-2">2:30-4pm</p>
-                                    <p className="text-gray-300">909 Liberty Street</p>
+                                    <p className="text-gray-300">909 Liberty Street<br />Durham, NC</p>
                                 </div>
 
                                 <div className="bg-black p-6 rounded-lg border border-[#D21312]">
                                     <h3 className="text-xl font-bold mb-3 text-[#D21312]">5th-7th Grade Boys</h3>
                                     <p className="text-white mb-2">January 25</p>
                                     <p className="text-white mb-2">10am-12pm</p>
-                                    <p className="text-gray-300">909 Liberty Street</p>
+                                    <p className="text-gray-300">909 Liberty Street<br />Durham, NC</p>
                                 </div>
                             </div>
                         </motion.div>
