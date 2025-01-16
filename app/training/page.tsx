@@ -7,13 +7,14 @@ import Link from 'next/link'
 // Helper function to generate Sunday dates
 const generateSundayDates = () => {
   const dates = []
-  // Start with January 19th, 2025
+  // Start with January 19th, 2025 (first Sunday after today)
   let currentDate = new Date('2025-01-19')
   const endDate = new Date('2025-03-31')
 
-  // Ensure we start on a Sunday
-  while (currentDate.getDay() !== 0) {
-    currentDate.setDate(currentDate.getDate() + 1)
+  // Verify we're starting on a Sunday (January 19th is a Sunday)
+  if (currentDate.getDay() !== 0) {
+    console.error('Start date is not a Sunday')
+    return dates
   }
 
   while (currentDate <= endDate) {
