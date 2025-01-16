@@ -93,8 +93,7 @@ export default function PodcastPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Tune in to our podcast for inspiring stories from the world of sports, 
-          expert insights, and discussions on youth athletics in Durham and beyond.
+          Sports Unlimited's very own Podcast "Full Court Press" will be launching soon! We'll discuss the Durham hoops scene and beyond. We'll also be featuring guests from our community!
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">

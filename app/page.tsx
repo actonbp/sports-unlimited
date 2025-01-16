@@ -206,7 +206,7 @@ export default function Home() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-8 md:mb-10 text-white">Why Choose Sports Unlimited?</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[
-              { icon: Star, title: "Expert Coaching", description: "Learn from Durham's best coaches who are passionate about youth development" },
+              { icon: Star, title: "Expert Training", description: "Learn from Durham's best coaches who are passionate about youth development" },
               { icon: Users, title: "Team Building", description: "Develop lifelong friendships and essential teamwork skills" },
               { icon: Calendar, title: "Year-round Programs", description: "Stay active all year with our diverse range of sports programs" }
             ].map((item, index) => (

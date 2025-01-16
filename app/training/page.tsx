@@ -93,6 +93,36 @@ export default function TrainingPage() {
             Contact Us
           </Link>
         </motion.section>
+
+        <motion.section
+          className="bg-white p-8 rounded-lg shadow-lg mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <h2 className="text-2xl font-semibold mb-6 text-primary">Training Sessions</h2>
+          <div className="space-y-6">
+            <div className="bg-primary/5 p-6 rounded-lg">
+              <h3 className="text-xl font-semibold mb-4 text-primary">Available Training Slots</h3>
+              <p className="text-gray-700 mb-4">Every Sunday:</p>
+              <ul className="list-disc pl-6 space-y-2 text-gray-700 mb-6">
+                <li>10:00 AM - 10:45 AM</li>
+                <li>11:00 AM - 11:45 AM</li>
+                <li>12:00 PM - 12:45 PM</li>
+              </ul>
+              <div className="bg-secondary/10 p-4 rounded-lg mb-6">
+                <p className="font-semibold text-secondary">Session Details:</p>
+                <ul className="mt-2 space-y-1 text-gray-700">
+                  <li>• Up to 6 spots available per session</li>
+                  <li>• $50 per session</li>
+                </ul>
+              </div>
+              <button className="bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 w-full sm:w-auto">
+                Book Your Session
+              </button>
+            </div>
+          </div>
+        </motion.section>
       </div>
     </div>
   )

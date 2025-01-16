@@ -73,6 +73,42 @@ export default function SponsorshipsPage() {
         </div>
 
         <motion.section
+          className="bg-white p-8 rounded-lg shadow-lg mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <h2 className="text-2xl font-semibold mb-6 text-primary">SAVE Sports Travel Basketball Program</h2>
+          <div className="prose max-w-none text-gray-700">
+            <p className="mb-4">
+              The SAVE Sports Travel Basketball program is a program that promotes Sports Against Violence Everywhere. Established in 2007 based out of the Salvation Army Boys & Girls of Durham NC, we invite you to become a sponsor for our 2024-25 travel season.
+            </p>
+            <p className="mb-4">
+              Our basketball teams benefit 56 youth in grades 5th, 8th, and 9th-12th grades. The primary source of funding for our AAU teams is from corporate and private sponsors. This season we joined the NXTPro/Pro16 Puma circuit.
+            </p>
+            <p className="mb-4">
+              In order to participate, we are in need of $3,600.00 per team. This will provide:
+            </p>
+            <ul className="list-disc pl-6 mb-4">
+              <li>Travel uniform for each player</li>
+              <li>Tournament fees</li>
+              <li>Travel accommodations</li>
+              <li>Shoes</li>
+              <li>Participation in the national tournament</li>
+            </ul>
+            <p className="mb-4">
+              This year's season will run from February 1, 2025 through July 31, 2025. Our journey covers stops in PA, NC, TN, MA, FL, and VA. In exchange for your sponsorship, your company logo will be placed on each uniform that will be seen as we travel throughout each state.
+            </p>
+            <p className="mb-4">
+              The Salvation Army Boys & Girls Club has provided a safe haven for the youth of our surrounding neighborhoods for 100 years. Our mission is to enable all young people, especially those who need us most, to reach their full potential as productive, caring, responsible citizens. Participation on our AAU basketball teams enables our youth to grow physically, socially and emotionally while strengthening our families and community through sports.
+            </p>
+            <p>
+              Your sponsorship will help ensure the success of our athletes both individually and as teams.
+            </p>
+          </div>
+        </motion.section>
+
+        <motion.section
           className="bg-secondary text-white p-8 rounded-lg shadow-lg mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

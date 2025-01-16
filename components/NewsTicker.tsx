@@ -7,27 +7,15 @@ import { Trophy, AlertCircle, Star, Calendar, Users, Award } from 'lucide-react'
 const newsItems = [
   {
     icon: <Trophy className="text-yellow-500" size={20} />,
-    text: "Our team SAVE Sports has qualified for the Puma Circuit Elite Division! 🏆"
+    text: "SAVE Sports Elite will be playing in the Puma NXTPro Circuit this upcoming 2025 season! 🏆"
   },
   {
     icon: <Calendar className="text-blue-500" size={20} />,
-    text: "Spring Tournament registration opens February 1st - Early bird discounts available until Feb 15th!"
+    text: "SAVE Sports Travel Basketball tryouts begin January 18th!"
   },
   {
     icon: <Star className="text-purple-500" size={20} />,
-    text: "New Elite Training Program launching in March - Limited spots available for ages 13-18"
-  },
-  {
-    icon: <Users className="text-green-500" size={20} />,
-    text: "Coach Mike joins our staff from Duke University - Book your private sessions now!"
-  },
-  {
-    icon: <Award className="text-red-500" size={20} />,
-    text: "Congratulations to our U16 team for winning the Regional Championship! 🎉"
-  },
-  {
-    icon: <AlertCircle className="text-orange-500" size={20} />,
-    text: "Summer Camp registration is now open - Special discount for early registration!"
+    text: "Sports Unlimited's first tournament of the season is on February 8th"
   }
 ]
 

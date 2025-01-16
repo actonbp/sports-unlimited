@@ -6,16 +6,16 @@ import Link from 'next/link'
 
 const teamMembers = [
   {
-    name: "Joshua",
+    name: "Dorsette",
     role: "Founder & CEO",
     image: "/images/joshua.jpg",
-    bio: "As the Founder and CEO of Sports Unlimited, Joshua's vision and leadership drive our mission to empower youth through sports. His background in community outreach and program development ensures that we create impactful and inclusive programs for all youth."
+    bio: "As the Founder and CEO of Sports Unlimited, Dorsette's vision and leadership drive our mission to empower youth through sports. His background in community outreach and program development ensures that we create impactful and inclusive programs for all youth."
   },
   {
     name: "Sebastian",
-    role: "Co-Founder",
+    role: "Director of Operations for Events",
     image: "/images/sebastian.jpg",
-    bio: "Sebastian, our Co-Founder, brings over 15 years of experience in youth sports management. With a Master's degree from Duke University, his expertise and passion for empowering young athletes significantly contribute to the strategic direction of Sports Unlimited."
+    bio: "Sebastian brings extensive experience in event operations and management. His expertise in organizing and executing sports events ensures smooth operations and exceptional experiences for all participants."
   }
 ]
 

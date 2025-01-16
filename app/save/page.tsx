@@ -30,34 +30,36 @@ export default function SaveSportsPage() {
 
             <main className="min-h-screen bg-black">
                 {/* Hero Section */}
-                <div className="relative h-[60vh] bg-black">
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/40 z-10" />
-                    <Image
-                        src="/images/save_hero.jpg"
-                        alt="SAVE Sports Hero"
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-                    <div className="relative z-20 h-full flex flex-col justify-center items-center text-white px-4">
-                        <motion.h1 
-                            className="text-5xl md:text-6xl font-bold mb-4 text-center"
-                            initial={{ opacity: 0, y: 20 }}
+                <section className="relative min-h-[60vh] flex items-center justify-center">
+                    <div className="absolute inset-0">
+                        <Image
+                            src="/images/slides_image-2.jpg"
+                            alt="SAVE Sports Background"
+                            fill
+                            className="object-cover"
+                            priority
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+                    </div>
+                    <div className="relative z-10 text-center px-4">
+                        <motion.h1
+                            className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-white"
+                            initial={{ opacity: 0, y: -50 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.8 }}
                         >
                             SAVE Sports
                         </motion.h1>
-                        <motion.p 
-                            className="text-2xl md:text-3xl text-center max-w-2xl"
+                        <motion.p
+                            className="text-xl sm:text-2xl md:text-3xl text-white/90 max-w-3xl mx-auto"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
                         >
                             Sports Against Violence Everywhere
                         </motion.p>
                     </div>
-                </div>
+                </section>
 
                 {/* Announcement Section */}
                 <div className="bg-black py-16">
