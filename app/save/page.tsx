@@ -36,10 +36,11 @@ export default function SaveSportsPage() {
                             src="/images/slides_image-2.jpg"
                             alt="SAVE Sports Background"
                             fill
-                            className="object-cover"
+                            className="object-cover opacity-100"
                             priority
+                            quality={100}
                         />
-                        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+                        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
                     </div>
                     <div className="relative z-10 text-center px-4">
                         <motion.h1
