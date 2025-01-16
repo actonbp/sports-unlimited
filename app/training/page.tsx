@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { Dumbbell, Target, Clock, Calendar, Mail, Phone, User } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, FormEvent, ChangeEvent } from 'react'
 
 // Helper function to generate Sunday dates
 const generateSundayDates = () => {
@@ -18,10 +18,17 @@ const generateSundayDates = () => {
   return dates
 }
 
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  age: string;
+}
+
 export default function TrainingPage() {
-  const [selectedDate, setSelectedDate] = useState(null)
-  const [selectedTime, setSelectedTime] = useState(null)
-  const [formData, setFormData] = useState({
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+  const [selectedTime, setSelectedTime] = useState<string | null>(null)
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
@@ -36,7 +43,7 @@ export default function TrainingPage() {
     { time: '12:00 PM - 12:45 PM', available: 6 }
   ]
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
 
@@ -73,6 +80,14 @@ export default function TrainingPage() {
     }
 
     setIsSubmitting(false)
+  }
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
   }
 
   return (
@@ -279,9 +294,10 @@ export default function TrainingPage() {
                     <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
                       type="text"
+                      name="name"
                       required
                       value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      onChange={handleInputChange}
                       className="pl-10 w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                       placeholder="John Doe"
                     />
@@ -296,9 +312,10 @@ export default function TrainingPage() {
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
                       type="email"
+                      name="email"
                       required
                       value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      onChange={handleInputChange}
                       className="pl-10 w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                       placeholder="john@example.com"
                     />
@@ -313,9 +330,10 @@ export default function TrainingPage() {
                     <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
                       type="tel"
+                      name="phone"
                       required
                       value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      onChange={handleInputChange}
                       className="pl-10 w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                       placeholder="(123) 456-7890"
                     />
@@ -328,9 +346,10 @@ export default function TrainingPage() {
                   </label>
                   <input
                     type="number"
+                    name="age"
                     required
                     value={formData.age}
-                    onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+                    onChange={handleInputChange}
                     className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                     placeholder="15"
                     min="5"
