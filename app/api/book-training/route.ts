@@ -1,13 +1,21 @@
 import { NextResponse } from 'next/server'
 
-const ADMIN_EMAIL = 'your-email@example.com' // Replace with your email
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL
+
+if (!ADMIN_EMAIL) {
+  console.warn('ADMIN_EMAIL environment variable is not set')
+}
 
 export async function POST(req: Request) {
   try {
     const data = await req.json()
     
-    // For now, just log the booking data
-    console.log('New booking request:', data)
+    // Log the booking data
+    console.log('New booking request:', {
+      ...data,
+      date: new Date(data.date).toLocaleDateString(),
+      adminEmail: ADMIN_EMAIL
+    })
 
     // TODO: Add email sending functionality
     // TODO: Add database storage
