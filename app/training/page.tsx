@@ -107,10 +107,11 @@ export default function TrainingPage() {
   return (
     <div>
       {/* Banner Section */}
-      <section className="relative bg-secondary py-20 px-4">
-        <div className="container mx-auto text-center">
+      <section className="relative bg-gradient-to-br from-secondary via-secondary to-primary py-32 px-4">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="container mx-auto text-center relative z-10">
           <motion.h1 
-            className="text-5xl sm:text-6xl font-bold mb-4 text-white"
+            className="text-6xl sm:text-7xl font-bold mb-6 text-white tracking-tight"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -118,18 +119,32 @@ export default function TrainingPage() {
             Training Programs
           </motion.h1>
           <motion.p 
-            className="text-xl sm:text-2xl text-white/90 max-w-3xl mx-auto"
+            className="text-xl sm:text-2xl text-white/90 max-w-3xl mx-auto font-medium"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             Develop your skills with our expert coaching and comprehensive training programs
           </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-8"
+          >
+            <Link 
+              href="#training-sessions"
+              className="inline-block bg-white text-secondary px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 hover:scale-105 transform shadow-lg"
+            >
+              View Available Sessions
+            </Link>
+          </motion.div>
         </div>
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
       </section>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-12">
+      <div id="training-sessions" className="container mx-auto px-4 py-12">
         <motion.section
           className="bg-white p-8 rounded-lg shadow-lg mb-12"
           initial={{ opacity: 0, y: 20 }}
