@@ -8,19 +8,25 @@ import { useState, FormEvent, ChangeEvent } from 'react'
 // Helper function to generate Sunday dates
 const generateSundayDates = () => {
   const dates = []
-  let currentDate = new Date('2025-01-19')
-  const endDate = new Date('2025-03-31')
+  // Create date with explicit time to avoid timezone issues
+  const startDate = new Date(2025, 0, 19) // January 19th, 2025 (a Sunday)
+  const endDate = new Date(2025, 2, 31) // March 31st, 2025
 
-  // Verify we're starting on a Sunday
-  if (currentDate.getDay() !== 0) {
-    console.error('Start date is not a Sunday')
-    return dates
-  }
+  let currentDate = new Date(startDate)
+
+  // Debug log to verify dates
+  console.log('First Sunday:', currentDate.toLocaleDateString('en-US', { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  }))
+  console.log('Day of week:', currentDate.getDay()) // 0 = Sunday
 
   while (currentDate <= endDate) {
     dates.push(new Date(currentDate))
-    currentDate = new Date(currentDate)
-    currentDate.setDate(currentDate.getDate() + 7)
+    // Add 7 days to get to next Sunday
+    currentDate = new Date(currentDate.getTime() + (7 * 24 * 60 * 60 * 1000))
   }
 
   return dates
@@ -144,40 +150,14 @@ export default function TrainingPage() {
         </motion.section>
 
         <motion.section
-          className="bg-primary text-white p-8 rounded-lg shadow-lg mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <h2 className="text-2xl font-semibold mb-6">Upcoming Training Camps</h2>
-          <div className="space-y-6">
-            <div className="bg-white/10 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-2">Summer Basketball Intensive</h3>
-              <p className="mb-2 text-white/90">A week-long camp focusing on basketball fundamentals and advanced techniques.</p>
-              <p className="text-sm text-white/80">Date: July 10-15, 2025 | Ages: 12-17</p>
-            </div>
-            <div className="bg-white/10 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-2">Soccer Skills Workshop</h3>
-              <p className="mb-2 text-white/90">Improve your soccer skills with drills and scrimmages led by professional coaches.</p>
-              <p className="text-sm text-white/80">Date: August 5-7, 2025 | Ages: 8-14</p>
-            </div>
-            <div className="bg-white/10 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-2">Multi-Sport Fitness Camp</h3>
-              <p className="mb-2 text-white/90">A diverse camp covering various sports and general fitness principles.</p>
-              <p className="text-sm text-white/80">Date: August 21-25, 2025 | Ages: 10-16</p>
-            </div>
-          </div>
-        </motion.section>
-
-        <motion.section
-          className="bg-secondary text-white p-8 rounded-lg shadow-lg"
+          className="bg-secondary text-white p-8 rounded-lg shadow-lg mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <h2 className="text-2xl font-semibold mb-6">Ready to Train?</h2>
+          <h2 className="text-2xl font-semibold mb-6">Want a Different Time or Custom Session?</h2>
           <p className="mb-6">
-            Join our training programs and take your game to the next level. Our experienced coaches are ready to help you achieve your goals.
+            If you'd like to schedule training at a different time or design your own custom training session, we're here to help! Contact us to discuss your specific needs and goals.
           </p>
           <Link 
             href="/contact" 
@@ -193,29 +173,33 @@ export default function TrainingPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <h2 className="text-2xl font-semibold mb-6 text-primary">Training Sessions</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-primary">Available Training Sessions</h2>
           
           {/* Calendar Section */}
           <div className="mb-8">
             <h3 className="text-xl font-semibold mb-4 text-primary flex items-center gap-2">
               <Calendar className="w-5 h-5" />
-              Available Dates
+              Select a Date
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {sundayDates.map((date, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedDate(date)}
-                  className={`p-4 rounded-lg border transition-all ${
-                    selectedDate && selectedDate.getTime() === date.getTime()
-                      ? 'bg-primary text-white border-primary'
-                      : 'hover:border-primary hover:bg-primary/5'
-                  }`}
-                >
-                  <p className="font-semibold">{date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</p>
-                  <p className="text-sm">Sunday</p>
-                </button>
-              ))}
+              {sundayDates.length > 0 ? (
+                sundayDates.map((date, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedDate(date)}
+                    className={`p-4 rounded-lg border transition-all ${
+                      selectedDate && selectedDate.getTime() === date.getTime()
+                        ? 'bg-primary text-white border-primary'
+                        : 'hover:border-primary hover:bg-primary/5'
+                    }`}
+                  >
+                    <p className="font-semibold">{date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</p>
+                    <p className="text-sm">Sunday</p>
+                  </button>
+                ))
+              ) : (
+                <p className="col-span-full text-gray-600">No available dates found. Please check back later.</p>
+              )}
             </div>
           </div>
 
@@ -228,7 +212,7 @@ export default function TrainingPage() {
             >
               <h3 className="text-xl font-semibold mb-4 text-primary flex items-center gap-2">
                 <Clock className="w-5 h-5" />
-                Available Time Slots
+                Select a Time
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {timeSlots.map((slot, index) => (
