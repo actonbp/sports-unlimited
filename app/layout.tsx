@@ -2,21 +2,20 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { Metadata, Viewport } from 'next'
+import type { Metadata } from 'next'
 
 const inter = Inter({ subsets: ['latin'] })
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-}
 
 export const metadata: Metadata = {
   title: 'Sports Unlimited',
   description: 'Building Community Through Sports',
   metadataBase: new URL('https://sportsunlimitednc.com'),
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
   openGraph: {
     title: 'Sports Unlimited',
     description: 'Building Community Through Sports',
@@ -62,9 +61,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <meta name="viewport" content={viewport.width} />
-      </head>
       <body className={inter.className}>
         <Header />
         <main>

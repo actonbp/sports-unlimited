@@ -13,7 +13,7 @@ function getRequiredEnvVar(name: string): string {
 
 // Initialize Stripe with the correct secret key
 const stripe = new Stripe(getRequiredEnvVar('STRIPE_SECRET_KEY'), {
-  apiVersion: '2023-10-16' as const,
+  apiVersion: '2025-01-27.acacia',
   typescript: true,
 })
 
