@@ -1,4 +1,4 @@
-import { createClient } from '@vercel/edge-config'
+import { get } from '@vercel/edge-config'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
@@ -7,9 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-01-27.acacia',
 })
 
-const config = createClient(process.env.EDGE_CONFIG!)
-
-// Helper function to get tournament name (you can expand this with actual tournament data)
+// Helper function to get tournament name
 function getTournamentName(tournamentId: string): string {
   const tournaments: { [key: string]: string } = {
     'feb2024': 'February 9th Tournament 2024',
@@ -39,7 +37,7 @@ export async function POST(req: Request) {
     const registrationId = `reg_${Date.now()}`
 
     // Get existing registrations or initialize empty array
-    const existingRegistrations = (await config.get(`tournament_${tournamentId}_registrations`)) || []
+    const existingRegistrations = await get<any[]>(`tournament_${tournamentId}_registrations`) || []
 
     // Add new registration
     const newRegistration = {
@@ -57,11 +55,28 @@ export async function POST(req: Request) {
       status: 'pending'
     }
 
-    // Update registrations in Edge Config
-    await config.upsert([{
-      key: `tournament_${tournamentId}_registrations`,
-      value: [...existingRegistrations, newRegistration]
-    }])
+    // Update registrations array
+    const updatedRegistrations = [...existingRegistrations, newRegistration]
+
+    // Update Edge Config using the REST API
+    const response = await fetch(`https://api.vercel.com/v1/edge-config/${process.env.EDGE_CONFIG_ID}/items`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${process.env.EDGE_CONFIG_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        items: [{
+          operation: 'update',
+          key: `tournament_${tournamentId}_registrations`,
+          value: updatedRegistrations
+        }]
+      })
+    })
+
+    if (!response.ok) {
+      throw new Error('Failed to update Edge Config')
+    }
 
     // Create payment intent
     const paymentIntent = await stripe.paymentIntents.create({
@@ -97,7 +112,7 @@ export async function PUT(req: Request) {
     const { registrationId, tournamentId } = await req.json()
     
     // Get existing registrations
-    const registrations = await config.get(`tournament_${tournamentId}_registrations`) || []
+    const registrations = await get<any[]>(`tournament_${tournamentId}_registrations`) || []
     
     // Update registration status
     const updatedRegistrations = registrations.map((reg: any) => 
@@ -106,11 +121,25 @@ export async function PUT(req: Request) {
         : reg
     )
 
-    // Save updated registrations using upsert
-    await config.upsert([{
-      key: `tournament_${tournamentId}_registrations`,
-      value: updatedRegistrations
-    }])
+    // Update Edge Config using the REST API
+    const response = await fetch(`https://api.vercel.com/v1/edge-config/${process.env.EDGE_CONFIG_ID}/items`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${process.env.EDGE_CONFIG_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        items: [{
+          operation: 'update',
+          key: `tournament_${tournamentId}_registrations`,
+          value: updatedRegistrations
+        }]
+      })
+    })
+
+    if (!response.ok) {
+      throw new Error('Failed to update Edge Config')
+    }
     
     return NextResponse.json({ success: true })
   } catch (error) {
@@ -136,7 +165,7 @@ export async function GET(req: Request) {
 
   try {
     // Get registrations from Edge Config
-    const registrations = await config.get(`tournament_${tournamentId}_registrations`) || []
+    const registrations = await get<any[]>(`tournament_${tournamentId}_registrations`) || []
     
     return NextResponse.json({ registrations })
   } catch (error) {
