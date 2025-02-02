@@ -9,11 +9,11 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Sports Unlimited',
   description: 'Building Community Through Sports',
-  metadataBase: new URL('https://savesportsnc.com'),
+  metadataBase: new URL('https://sportsunlimitednc.com'),
   openGraph: {
     title: 'Sports Unlimited',
     description: 'Building Community Through Sports',
-    url: 'https://savesportsnc.com',
+    url: 'https://sportsunlimitednc.com',
     siteName: 'Sports Unlimited',
     images: [
       {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     statusBarStyle: 'black-translucent',
     startupImage: [
       {
-        url: 'https://sports-unlimited.vercel.app/opengraph-image',
+        url: 'https://https://sportsunlimitednc.com/opengraph-image',
         media: '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)',
       }
     ],

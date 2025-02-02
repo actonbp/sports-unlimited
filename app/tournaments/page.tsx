@@ -17,6 +17,7 @@ interface Tournament {
   location: string;
   registrationFee: number;
   isInPersonOnly?: boolean;
+  isQuizBowl?: boolean;
 }
 
 function CountdownTimer({ targetDate }: { targetDate: string }) {
@@ -70,47 +71,55 @@ function CountdownTimer({ targetDate }: { targetDate: string }) {
 
 const tournaments: Tournament[] = [
   {
-    id: '1',
+    id: 'feb8',
     name: 'SU Winter Showcase',
     date: 'February 8, 2025',
     location: 'Durham, NC',
     registrationFee: 140,
-    isInPersonOnly: true // This tournament is in-person registration only
+    isInPersonOnly: true
   },
   {
-    id: '2',
+    id: 'feb15',
     name: 'SU Hoops Challenge',
     date: 'February 15, 2025',
     location: 'Durham, NC',
     registrationFee: 140
   },
   {
-    id: '3',
+    id: 'feb22',
     name: 'SU Battle on Tobacco Road',
     date: 'February 22, 2025',
     location: 'Durham, NC',
     registrationFee: 140
   },
   {
-    id: '4',
+    id: 'mar1',
     name: 'SU March Jam Session',
     date: 'March 1, 2025',
     location: 'Durham, NC',
     registrationFee: 140
   },
   {
-    id: '5',
+    id: 'mar15',
     name: 'Tory Trueluck Invitational',
     date: 'March 15, 2025',
     location: 'Durham, NC',
     registrationFee: 140
   },
   {
-    id: '6',
+    id: 'mar29',
     name: 'SU Spring Showdown',
     date: 'March 29, 2025',
     location: 'Durham, NC',
     registrationFee: 140
+  },
+  {
+    id: 'nov27',
+    name: 'Quiz Bowl Tournament',
+    date: 'November 27, 2024',
+    location: 'Durham, NC',
+    registrationFee: 2,
+    isQuizBowl: true
   }
 ]
 
@@ -165,13 +174,19 @@ export default function TournamentsPage() {
 
       {/* Registration Fee Info */}
       <div className="bg-secondary/10 py-6">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container mx-auto px-4 text-center space-y-4">
           <div className="inline-block bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-bold text-primary mb-2">Tournament Registration Fee</h2>
-            <p className="text-lg">
-              <span className="font-semibold text-secondary">$140</span>
-              <span className="text-gray-600 ml-2">per team</span>
-            </p>
+            <h2 className="text-xl font-bold text-primary mb-2">Tournament Registration Fees</h2>
+            <div className="space-y-2">
+              <p className="text-lg">
+                <span className="font-semibold text-secondary">$140</span>
+                <span className="text-gray-600 ml-2">per team for Basketball Tournaments</span>
+              </p>
+              <p className="text-lg">
+                <span className="font-semibold text-secondary">$2</span>
+                <span className="text-gray-600 ml-2">per team for Quiz Bowl Tournament</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -182,14 +197,14 @@ export default function TournamentsPage() {
           {tournaments.map((tournament, index) => (
             <motion.div
               key={tournament.id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              className={`bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 ${tournament.isQuizBowl ? 'border-2 border-secondary' : ''}`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className="flex flex-col md:flex-row">
                 {/* Calendar-style date display */}
-                <div className="bg-secondary text-white p-4 md:w-32 flex flex-col items-center justify-center">
+                <div className={`${tournament.isQuizBowl ? 'bg-secondary/80' : 'bg-secondary'} text-white p-4 md:w-32 flex flex-col items-center justify-center`}>
                   <div className="text-sm font-medium">{new Date(tournament.date).toLocaleString('default', { month: 'short' })}</div>
                   <div className="text-3xl font-bold">{new Date(tournament.date).getDate()}</div>
                   <div className="text-sm">{new Date(tournament.date).getFullYear()}</div>
@@ -198,7 +213,12 @@ export default function TournamentsPage() {
                 <div className="flex-1 p-6">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                     <div>
-                      <h3 className="text-xl font-bold text-primary mb-2 md:mb-0">{tournament.name}</h3>
+                      <div className="flex items-center space-x-2">
+                        <h3 className="text-xl font-bold text-primary">{tournament.name}</h3>
+                        {tournament.isQuizBowl && (
+                          <span className="bg-secondary/10 text-secondary text-sm px-2 py-1 rounded-full">Special Event</span>
+                        )}
+                      </div>
                       <div className="space-y-1 md:space-y-0 md:space-x-6 md:flex md:items-center text-gray-600">
                         <div className="flex items-center">
                           <MapPin className="w-5 h-5 mr-2 text-secondary" />
@@ -207,6 +227,10 @@ export default function TournamentsPage() {
                         <div className="flex items-center">
                           <Clock className="w-5 h-5 mr-2 text-secondary" />
                           <span>Coming Soon</span>
+                        </div>
+                        <div className="flex items-center">
+                          <Trophy className="w-5 h-5 mr-2 text-secondary" />
+                          <span>${tournament.registrationFee} per team</span>
                         </div>
                       </div>
                     </div>
