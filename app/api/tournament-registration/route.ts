@@ -19,14 +19,13 @@ const stripe = new Stripe(getRequiredEnvVar('STRIPE_SECRET_KEY'), {
 // Helper function to get tournament name
 function getTournamentName(tournamentId: string): string {
   const tournaments: { [key: string]: string } = {
-    'nov27': 'Quiz Bowl Tournament - November 27th 2024',
-    'feb16': 'February 16th Tournament 2024',
-    'feb23': 'February 23rd Tournament 2024',
-    'mar2': 'March 2nd Tournament 2024',
-    'mar9': 'March 9th Tournament 2024',
-    'mar16': 'March 16th Tournament 2024',
-    'mar23': 'March 23rd Tournament 2024',
-    'mar30': 'March 30th Tournament 2024'
+    'feb8': 'SU Winter Showcase - February 8th 2025',
+    'feb15': 'SU Hoops Challenge - February 15th 2025',
+    'feb22': 'SU Battle on Tobacco Road - February 22nd 2025',
+    'mar1': 'SU March Jam Session - March 1st 2025',
+    'mar15': 'Tory Trueluck Invitational - March 15th 2025',
+    'mar29': 'SU Spring Showdown - March 29th 2025',
+    'nov27': 'Quiz Bowl Tournament - November 27th 2024'
   }
   
   const tournamentName = tournaments[tournamentId]
