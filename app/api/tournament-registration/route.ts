@@ -19,7 +19,7 @@ const stripe = new Stripe(getRequiredEnvVar('STRIPE_SECRET_KEY'), {
 // Helper function to get tournament name
 function getTournamentName(tournamentId: string): string {
   const tournaments: { [key: string]: string } = {
-    'quiz-bowl-feb': 'Quiz Bowl Teen Night Tournament - February 2024',
+    'nov27': 'Quiz Bowl Tournament - November 27th 2024',
     'feb16': 'February 16th Tournament 2024',
     'feb23': 'February 23rd Tournament 2024',
     'mar2': 'March 2nd Tournament 2024',
@@ -91,14 +91,12 @@ export async function POST(req: Request) {
       throw new Error('Failed to update Edge Config')
     }
 
-    // Calculate amount based on number of players
-    const basePrice = 2000 // $20.00 base price
-    const perPlayerPrice = 500 // $5.00 per player
-    const totalAmount = basePrice + (perPlayerPrice * numberOfPlayers)
+    // Determine payment amount based on tournament
+    const amount = tournamentId === 'nov27' ? 200 : 14000 // $2.00 for Quiz Bowl, $140.00 for others
 
-    // Create payment intent
+    // Create payment intent with tournament-specific amount
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: totalAmount,
+      amount, // Amount in cents
       currency: 'usd',
       metadata: {
         registrationId,
@@ -108,13 +106,13 @@ export async function POST(req: Request) {
         coachName,
         numberOfPlayers: numberOfPlayers.toString()
       },
-      description: `Quiz Bowl Teen Night Tournament Registration - Team: ${teamName} (${numberOfPlayers} players)`
+      description: `Tournament Registration - ${tournamentName} - Team: ${teamName}`
     })
 
     return NextResponse.json({ 
       clientSecret: paymentIntent.client_secret,
       registrationId,
-      amount: totalAmount
+      amount
     })
 
   } catch (error) {
