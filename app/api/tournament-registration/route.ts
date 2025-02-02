@@ -2,8 +2,21 @@ import { get } from '@vercel/edge-config'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
+// Check required environment variables
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error('STRIPE_SECRET_KEY is not set in environment variables')
+}
+
+if (!process.env.EDGE_CONFIG_ID) {
+  throw new Error('EDGE_CONFIG_ID is not set in environment variables')
+}
+
+if (!process.env.EDGE_CONFIG_TOKEN) {
+  throw new Error('EDGE_CONFIG_TOKEN is not set in environment variables')
+}
+
 // Initialize Stripe with the correct secret key
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2025-01-27.acacia',
 })
 
