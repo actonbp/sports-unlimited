@@ -115,12 +115,14 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <Link 
-              href="/tournaments" 
-              className="bg-gradient hover:opacity-90 text-white px-6 py-3 rounded-full text-base sm:text-lg font-semibold transition-all duration-300 inline-block drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]"
-            >
-              Explore Tournaments
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/tournaments"
+                className="bg-secondary text-white px-6 py-2 rounded-full font-semibold hover:bg-secondary/90 transition-all duration-300 transform hover:scale-105"
+              >
+                Register Team for Tournaments Now
+              </Link>
+            </div>
           </motion.div>
         </div>
         <motion.div 
@@ -227,33 +229,31 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-10 sm:py-12 md:py-16 px-4 bg-secondary text-white">
-        <div className="container mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-white">Upcoming Events</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {[
-              { title: "Summer Basketball Camp", date: "July 15-20, 2025" },
-              { title: "Soccer Skills Workshop", date: "August 5-7, 2025" },
-              { title: "Fall Sports Open House", date: "September 1, 2025" }
-            ].map((event, index) => (
-              <motion.div
-                key={index}
-                className="bg-white/10 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-200"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-              >
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white">{event.title}</h3>
-                <p className="text-white/80">{event.date}</p>
-              </motion.div>
-            ))}
-          </div>
-          <Link 
-            href="/events" 
-            className="mt-8 inline-block bg-white text-secondary px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 hover:scale-105 transform shadow-lg"
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
           >
-            View All Events
-          </Link>
+            <h2 className="text-3xl font-bold text-primary mb-4">Upcoming Tournaments</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Join us for exciting basketball tournaments throughout the year. View our tournament schedule and register your team today!
+            </p>
+          </motion.div>
+
+          <div className="flex justify-center">
+            <Link 
+              href="/tournaments" 
+              className="inline-flex items-center px-8 py-3 bg-secondary text-white rounded-full hover:bg-secondary/90 transition-all duration-300 transform hover:scale-105"
+            >
+              View Tournament Schedule
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
 

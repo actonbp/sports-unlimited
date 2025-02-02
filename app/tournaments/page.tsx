@@ -3,12 +3,20 @@
 import { motion } from 'framer-motion'
 import { Calendar, MapPin, Trophy, Clock } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
+import TournamentRegistration from '@/components/TournamentRegistration'
+
+// Initialize Stripe
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 interface Tournament {
   id: string;
   name: string;
   date: string;
   location: string;
+  registrationFee: number;
+  isInPersonOnly?: boolean;
 }
 
 function CountdownTimer({ targetDate }: { targetDate: string }) {
@@ -65,42 +73,60 @@ const tournaments: Tournament[] = [
     id: '1',
     name: 'SU Winter Showcase',
     date: 'February 8, 2025',
-    location: 'Durham, NC'
+    location: 'Durham, NC',
+    registrationFee: 140,
+    isInPersonOnly: true // This tournament is in-person registration only
   },
   {
     id: '2',
     name: 'SU Hoops Challenge',
     date: 'February 15, 2025',
-    location: 'Durham, NC'
+    location: 'Durham, NC',
+    registrationFee: 140
   },
   {
     id: '3',
     name: 'SU Battle on Tobacco Road',
     date: 'February 22, 2025',
-    location: 'Durham, NC'
+    location: 'Durham, NC',
+    registrationFee: 140
   },
   {
     id: '4',
     name: 'SU March Jam Session',
     date: 'March 1, 2025',
-    location: 'Durham, NC'
+    location: 'Durham, NC',
+    registrationFee: 140
   },
   {
     id: '5',
     name: 'Tory Trueluck Invitational',
     date: 'March 15, 2025',
-    location: 'Durham, NC'
+    location: 'Durham, NC',
+    registrationFee: 140
   },
   {
     id: '6',
     name: 'SU Spring Showdown',
     date: 'March 29, 2025',
-    location: 'Durham, NC'
+    location: 'Durham, NC',
+    registrationFee: 140
   }
 ]
 
 export default function TournamentsPage() {
-  const nextTournament = tournaments[0]; // Assuming tournaments are sorted by date
+  const [selectedTournament, setSelectedTournament] = useState<Tournament | null>(null)
+  const [registrationError, setRegistrationError] = useState('')
+  const nextTournament = tournaments[0]
+
+  const handleRegistrationSuccess = () => {
+    setSelectedTournament(null)
+    // You could add a success message or other feedback here
+  }
+
+  const handleRegistrationError = (error: string) => {
+    setRegistrationError(error)
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -144,7 +170,7 @@ export default function TournamentsPage() {
             <h2 className="text-xl font-bold text-primary mb-2">Tournament Registration Fee</h2>
             <p className="text-lg">
               <span className="font-semibold text-secondary">$140</span>
-              <span className="text-gray-600 ml-2">(Pay in person)</span>
+              <span className="text-gray-600 ml-2">per team</span>
             </p>
           </div>
         </div>
@@ -184,18 +210,57 @@ export default function TournamentsPage() {
                         </div>
                       </div>
                     </div>
-                    <button 
-                      className="mt-4 md:mt-0 bg-secondary text-white py-2 px-6 rounded-full hover:bg-secondary/90 transition-colors duration-200 flex items-center justify-center space-x-2"
-                    >
-                      <Trophy className="w-5 h-5" />
-                      <span>Register in Person<br />or Contact Coach Dorsette</span>
-                    </button>
+                    {tournament.isInPersonOnly ? (
+                      <button 
+                        className="mt-4 md:mt-0 bg-secondary text-white py-2 px-6 rounded-full hover:bg-secondary/90 transition-colors duration-200 flex items-center justify-center space-x-2"
+                      >
+                        <Trophy className="w-5 h-5" />
+                        <span>Register in Person<br />or Contact Coach Dorsette</span>
+                      </button>
+                    ) : (
+                      <button 
+                        onClick={() => setSelectedTournament(tournament)}
+                        className="mt-4 md:mt-0 bg-secondary text-white py-2 px-6 rounded-full hover:bg-secondary/90 transition-colors duration-200 flex items-center justify-center space-x-2"
+                      >
+                        <Trophy className="w-5 h-5" />
+                        <span>Register Now</span>
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Registration Modal */}
+        {selectedTournament && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-lg shadow-xl max-h-[90vh] overflow-y-auto w-full max-w-3xl">
+              <div className="p-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 className="text-xl font-bold text-primary">Tournament Registration</h2>
+                <button 
+                  onClick={() => setSelectedTournament(null)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  ×
+                </button>
+              </div>
+              <div className="p-4">
+                <Elements stripe={stripePromise}>
+                  <TournamentRegistration
+                    tournamentId={selectedTournament.id}
+                    tournamentName={selectedTournament.name}
+                    date={selectedTournament.date}
+                    registrationFee={selectedTournament.registrationFee}
+                    onSuccess={handleRegistrationSuccess}
+                    onError={handleRegistrationError}
+                  />
+                </Elements>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Contact Section */}
         <motion.div
@@ -204,11 +269,8 @@ export default function TournamentsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <h2 className="text-2xl font-bold mb-4">Want to Stay Updated?</h2>
-          <p className="mb-6">Join our mailing list to be notified when tournament registration opens and receive exclusive early-bird pricing!</p>
-          <button className="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-colors duration-200">
-            Get Notified
-          </button>
+          <h2 className="text-2xl font-bold mb-4">Questions About Registration?</h2>
+          <p className="mb-6">Contact Coach Dorsette at 919-478-7954 or email sportsunlimited919@gmail.com</p>
         </motion.div>
       </div>
     </div>

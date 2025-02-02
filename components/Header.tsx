@@ -59,10 +59,10 @@ export default function Header() {
               </motion.li>
             ))}
             <Link
-              href="/registration"
+              href="/tournaments"
               className="ml-4 bg-red-600 text-white px-4 py-2 rounded-md font-medium hover:bg-red-700 transition-colors duration-200"
             >
-              Register Now
+              Register Team for Tournaments
             </Link>
           </ul>
 
@@ -109,11 +109,11 @@ export default function Header() {
               ))}
               <motion.li whileHover={{ scale: 1.02 }}>
                 <Link
-                  href="/registration"
+                  href="/tournaments"
                   className="block mx-4 mt-2 bg-red-600 text-white px-4 py-2 rounded-md font-medium text-center hover:bg-red-700 transition-colors duration-200"
                   onClick={() => setIsOpen(false)}
                 >
-                  Register Now
+                  Register Team for Tournaments
                 </Link>
               </motion.li>
             </ul>

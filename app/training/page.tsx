@@ -4,6 +4,14 @@ import { motion } from 'framer-motion'
 import { Dumbbell, Target, Clock, Calendar, Mail, Phone, User } from 'lucide-react'
 import Link from 'next/link'
 import { useState, FormEvent, ChangeEvent } from 'react'
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
+import PaymentForm from '@/components/PaymentForm'
+import { useStripe, useElements } from '@stripe/react-stripe-js'
+import { useRouter } from 'next/navigation'
+
+// Initialize Stripe
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 // Helper function to generate Sunday dates
 const generateSundayDates = () => {
@@ -40,8 +48,8 @@ interface FormData {
 }
 
 export default function TrainingPage() {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
-  const [selectedTime, setSelectedTime] = useState<string | null>(null)
+  const [selectedDate, setSelectedDate] = useState<string>('')
+  const [selectedTime, setSelectedTime] = useState<string>('')
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -49,51 +57,106 @@ export default function TrainingPage() {
     age: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showPayment, setShowPayment] = useState(false)
+  const [paymentError, setPaymentError] = useState('')
+  const [clientSecret, setClientSecret] = useState('')
   const sundayDates = generateSundayDates()
+  const router = useRouter()
   
-  const timeSlots = [
-    { time: '10:00 AM - 10:45 AM', available: 6 },
-    { time: '11:00 AM - 11:45 AM', available: 6 },
-    { time: '12:00 PM - 12:45 PM', available: 6 }
+  const availableDates = [
+    { date: 'Feb 9', day: 'Sunday' },
+    { date: 'Feb 16', day: 'Sunday' },
+    { date: 'Feb 23', day: 'Sunday' },
+    { date: 'Mar 2', day: 'Sunday' },
+    { date: 'Mar 9', day: 'Sunday' },
+    { date: 'Mar 16', day: 'Sunday' },
+    { date: 'Mar 23', day: 'Sunday' },
+    { date: 'Mar 30', day: 'Sunday' }
   ]
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+  const availableTimes = [
+    { time: '10:00 AM - 10:45 AM', spots: 6 },
+    { time: '11:00 AM - 11:45 AM', spots: 6 },
+    { time: '12:00 PM - 12:45 PM', spots: 6 }
+  ]
 
-    const bookingData = {
-      ...formData,
-      date: selectedDate,
-      time: selectedTime,
+  const handleDateSelect = (date: string) => {
+    setSelectedDate(date)
+  }
+
+  const handleTimeSelect = (time: string) => {
+    setSelectedTime(time)
+    if (selectedDate && time) {
+      router.push(`/training/book?date=${selectedDate}&time=${time}`)
     }
+  }
 
+  const handlePaymentSuccess = async () => {
     try {
       const response = await fetch('/api/book-training', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(bookingData),
+        body: JSON.stringify({
+          ...formData,
+          date: selectedDate,
+          time: selectedTime,
+          paid: true,
+        }),
       })
 
       if (response.ok) {
-        alert('Booking request submitted! We will contact you to confirm.')
-        setSelectedDate(null)
-        setSelectedTime(null)
+        alert('Booking confirmed! We will send you a confirmation email.')
+        setSelectedDate('')
+        setSelectedTime('')
         setFormData({
           name: '',
           email: '',
           phone: '',
           age: '',
         })
+        setShowPayment(false)
       } else {
-        alert('There was an error submitting your booking. Please try again.')
+        throw new Error('Failed to save booking')
       }
     } catch (error) {
-      alert('There was an error submitting your booking. Please try again.')
+      console.error('Error saving booking:', error)
+      alert('There was an error saving your booking. Please contact support.')
     }
+  }
 
-    setIsSubmitting(false)
+  const handlePaymentError = (error: string) => {
+    setPaymentError(error)
+    setTimeout(() => setPaymentError(''), 5000)
+  }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      // Create payment intent when showing payment form
+      const response = await fetch('/api/create-payment-intent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount: 50,
+          description: `Training Session - ${selectedDate} ${selectedTime}`,
+        }),
+      })
+
+      const data = await response.json()
+      setClientSecret(data.clientSecret)
+      setShowPayment(true)
+    } catch (error) {
+      console.error('Error creating payment intent:', error)
+      setPaymentError('Failed to initialize payment. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -196,25 +259,24 @@ export default function TrainingPage() {
               <Calendar className="w-5 h-5" />
               Select a Date
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {sundayDates.length > 0 ? (
-                sundayDates.map((date, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedDate(date)}
-                    className={`p-4 rounded-lg border transition-all ${
-                      selectedDate && selectedDate.getTime() === date.getTime()
-                        ? 'bg-primary text-white border-primary'
-                        : 'hover:border-primary hover:bg-primary/5'
-                    }`}
-                  >
-                    <p className="font-semibold">{date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</p>
-                    <p className="text-sm">Sunday</p>
-                  </button>
-                ))
-              ) : (
-                <p className="col-span-full text-gray-600">No available dates found. Please check back later.</p>
-              )}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {availableDates.map((dateObj, index) => (
+                <motion.button
+                  key={dateObj.date}
+                  onClick={() => handleDateSelect(dateObj.date)}
+                  className={`p-4 rounded-lg border-2 transition-all ${
+                    selectedDate === dateObj.date 
+                    ? 'border-secondary bg-secondary text-white' 
+                    : 'border-gray-200 hover:border-secondary'
+                  }`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <div className="font-bold">{dateObj.date}</div>
+                  <div className="text-sm">{dateObj.day}</div>
+                </motion.button>
+              ))}
             </div>
           </div>
 
@@ -230,19 +292,22 @@ export default function TrainingPage() {
                 Select a Time
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {timeSlots.map((slot, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedTime(slot.time)}
-                    className={`p-4 rounded-lg border transition-all ${
-                      selectedTime === slot.time
-                        ? 'bg-primary text-white border-primary'
-                        : 'hover:border-primary hover:bg-primary/5'
+                {availableTimes.map((timeObj, index) => (
+                  <motion.button
+                    key={timeObj.time}
+                    onClick={() => handleTimeSelect(timeObj.time)}
+                    className={`p-4 rounded-lg border-2 transition-all ${
+                      selectedTime === timeObj.time 
+                      ? 'border-secondary bg-secondary text-white' 
+                      : 'border-gray-200 hover:border-secondary'
                     }`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
-                    <p className="font-semibold">{slot.time}</p>
-                    <p className="text-sm">{slot.available} spots available</p>
-                  </button>
+                    <div className="font-bold">{timeObj.time}</div>
+                    <div className="text-sm">{timeObj.spots} spots available</div>
+                  </motion.button>
                 ))}
               </div>
             </motion.div>
@@ -250,107 +315,134 @@ export default function TrainingPage() {
 
           {/* Booking Form */}
           {selectedDate && selectedTime && (
-            <motion.form
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="mt-8 space-y-6 bg-white/50 p-6 rounded-lg border border-secondary/20"
-              onSubmit={handleSubmit}
             >
-              <h3 className="text-xl font-semibold text-primary">Complete Your Booking</h3>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name
-                  </label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="pl-10 w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                      placeholder="John Doe"
-                    />
+              {!showPayment ? (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <h3 className="text-xl font-semibold text-primary">Complete Your Booking</h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Full Name
+                      </label>
+                      <div className="relative">
+                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <input
+                          type="text"
+                          name="name"
+                          required
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          className="pl-10 w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="John Doe"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Email
+                      </label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <input
+                          type="email"
+                          name="email"
+                          required
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className="pl-10 w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="john@example.com"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Phone Number
+                      </label>
+                      <div className="relative">
+                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <input
+                          type="tel"
+                          name="phone"
+                          required
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          className="pl-10 w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="(123) 456-7890"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Age
+                      </label>
+                      <input
+                        type="number"
+                        name="age"
+                        required
+                        value={formData.age}
+                        onChange={handleInputChange}
+                        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                        placeholder="15"
+                        min="5"
+                        max="99"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email
-                  </label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="pl-10 w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                      placeholder="john@example.com"
-                    />
+                  <div className="bg-secondary/5 p-4 rounded-lg">
+                    <h4 className="font-semibold text-secondary mb-2">Booking Summary</h4>
+                    <p className="text-gray-600">
+                      Date: {selectedDate}
+                    </p>
+                    <p className="text-gray-600">Time: {selectedTime}</p>
+                    <p className="text-gray-600">Cost: $50</p>
                   </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`w-full sm:w-auto px-8 py-3 rounded-lg font-semibold transition-all duration-300 
+                      ${isSubmitting 
+                        ? 'bg-gray-400 cursor-not-allowed' 
+                        : 'bg-secondary text-white hover:bg-opacity-90'}`}
+                  >
+                    {isSubmitting ? 'Processing...' : 'Proceed to Payment'}
+                  </button>
+                </form>
+              ) : (
+                <div className="space-y-6">
+                  <h3 className="text-xl font-semibold text-primary">Complete Payment</h3>
+                  {paymentError && (
+                    <div className="bg-red-50 text-red-500 p-4 rounded-lg mb-4">
+                      {paymentError}
+                    </div>
+                  )}
+                  {clientSecret && (
+                    <Elements stripe={stripePromise} options={{ clientSecret }}>
+                      <PaymentForm
+                        clientSecret={clientSecret}
+                        onSuccess={handlePaymentSuccess}
+                        onError={handlePaymentError}
+                      />
+                    </Elements>
+                  )}
+                  <button
+                    onClick={() => setShowPayment(false)}
+                    className="w-full sm:w-auto px-8 py-3 rounded-lg font-semibold text-gray-600 hover:text-gray-800 transition-colors duration-200"
+                  >
+                    Back to Form
+                  </button>
                 </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone Number
-                  </label>
-                  <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type="tel"
-                      name="phone"
-                      required
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="pl-10 w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                      placeholder="(123) 456-7890"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Age
-                  </label>
-                  <input
-                    type="number"
-                    name="age"
-                    required
-                    value={formData.age}
-                    onChange={handleInputChange}
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                    placeholder="15"
-                    min="5"
-                    max="99"
-                  />
-                </div>
-              </div>
-
-              <div className="bg-secondary/5 p-4 rounded-lg">
-                <h4 className="font-semibold text-secondary mb-2">Booking Summary</h4>
-                <p className="text-gray-600">
-                  Date: {selectedDate?.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
-                </p>
-                <p className="text-gray-600">Time: {selectedTime}</p>
-                <p className="text-gray-600">Cost: $50</p>
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full sm:w-auto px-8 py-3 rounded-lg font-semibold transition-all duration-300 
-                  ${isSubmitting 
-                    ? 'bg-gray-400 cursor-not-allowed' 
-                    : 'bg-secondary text-white hover:bg-opacity-90'}`}
-              >
-                {isSubmitting ? 'Submitting...' : 'Submit Booking Request'}
-              </button>
-            </motion.form>
+              )}
+            </motion.div>
           )}
         </motion.section>
       </div>

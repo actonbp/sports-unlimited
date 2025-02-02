@@ -132,38 +132,38 @@ export default function SaveSportsPage() {
                 {/* Tryout Schedule Section */}
                 <div className="bg-[#1a1a1a] py-16">
                     <div className="container mx-auto px-4">
-                        <motion.div 
+                        <motion.div
                             className="max-w-4xl mx-auto"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
                             transition={{ duration: 0.6 }}
                         >
                             <h2 className="text-3xl font-bold mb-8 text-center text-white">SAVE Sports Tryout Dates</h2>
                             <div className="grid md:grid-cols-2 gap-6">
                                 <div className="bg-black p-6 rounded-lg border border-[#D21312]">
-                                    <h3 className="text-xl font-bold mb-3 text-[#D21312]">5th Grade Girls</h3>
-                                    <p className="text-white mb-2">January 18</p>
+                                    <h3 className="text-xl font-bold mb-3 text-[#D21312]">5th-7th Grade Boys</h3>
+                                    <p className="text-white mb-2">February 10th</p>
                                     <p className="text-white mb-2">10am-12pm</p>
                                     <p className="text-gray-300">909 Liberty Street<br />Durham, NC</p>
                                 </div>
 
                                 <div className="bg-black p-6 rounded-lg border border-[#D21312]">
                                     <h3 className="text-xl font-bold mb-3 text-[#D21312]">8th Grade Boys</h3>
-                                    <p className="text-white mb-2">January 19</p>
+                                    <p className="text-white mb-2">February 17th</p>
                                     <p className="text-white mb-2">1-2pm</p>
                                     <p className="text-gray-300">909 Liberty Street<br />Durham, NC</p>
                                 </div>
 
                                 <div className="bg-black p-6 rounded-lg border border-[#D21312]">
                                     <h3 className="text-xl font-bold mb-3 text-[#D21312]">15U, 16U, 17U</h3>
-                                    <p className="text-white mb-2">January 19</p>
+                                    <p className="text-white mb-2">February 17th</p>
                                     <p className="text-white mb-2">2:30-4pm</p>
                                     <p className="text-gray-300">909 Liberty Street<br />Durham, NC</p>
                                 </div>
 
                                 <div className="bg-black p-6 rounded-lg border border-[#D21312]">
-                                    <h3 className="text-xl font-bold mb-3 text-[#D21312]">5th-7th Grade Boys</h3>
-                                    <p className="text-white mb-2">January 25</p>
+                                    <h3 className="text-xl font-bold mb-3 text-[#D21312]">5th Grade Girls</h3>
+                                    <p className="text-white mb-2">February 24th</p>
                                     <p className="text-white mb-2">10am-12pm</p>
                                     <p className="text-gray-300">909 Liberty Street<br />Durham, NC</p>
                                 </div>
@@ -226,6 +226,53 @@ export default function SaveSportsPage() {
                             <Link href="/contact" className="bg-[#D21312] text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-[#b30f0f] transition-colors duration-300 inline-block">
                                 Contact Us
                             </Link>
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* Alumni Section */}
+                <div className="bg-[#1a1a1a] text-white py-16 border-t border-b border-[#D21312]">
+                    <div className="container mx-auto px-4">
+                        <motion.div 
+                            className="max-w-4xl mx-auto"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <h2 className="text-3xl font-bold mb-8 text-center">Student Athlete Alumni</h2>
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {[
+                                    { name: "DeShone Hicks", school: "Livingston College" },
+                                    { name: "Jordan Beale", school: "Concord University" },
+                                    { name: "Tahj Small", school: "Utah Valley" },
+                                    { name: "Javier Rogers", school: "Catawba College" },
+                                    { name: "Bryant Randleman", school: "High Point University" },
+                                    { name: "Jalen Johnson", school: "Lenior Rhyne" },
+                                    { name: "JaQuan Deal", school: "Methodist University" },
+                                    { name: "Colt Langdon", school: "Butler University" },
+                                    { name: "Kaleb Morrow", school: "East Carolina", football: true },
+                                    { name: "Rashad Dixon", school: "Newberry College" },
+                                    { name: "Malek Frazier", school: "Johnson & Wales" },
+                                    { name: "Isaiah Reddish", school: "Kennesaw State" },
+                                    { name: "Aaron McCullough", school: "Guilford College", football: true }
+                                ].map((alumni, index) => (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                                        className="bg-black p-6 rounded-lg border border-[#D21312] hover:bg-[#D21312]/10 transition-all duration-300"
+                                    >
+                                        <h3 className="text-xl font-bold text-white mb-2">{alumni.name}</h3>
+                                        <p className="text-gray-300">{alumni.school}</p>
+                                        {alumni.football && (
+                                            <span className="inline-block mt-2 text-2xl" role="img" aria-label="football">
+                                                🏈
+                                            </span>
+                                        )}
+                                    </motion.div>
+                                ))}
+                            </div>
                         </motion.div>
                     </div>
                 </div>

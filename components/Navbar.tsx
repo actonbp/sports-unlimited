@@ -71,13 +71,13 @@ export default function Navbar() {
               })}
             </div>
             <Link
-              href="/registration"
+              href="/tournaments"
               className={`ml-4 px-4 py-2 rounded-lg bg-secondary text-white font-medium text-sm
                 transition-all duration-200 hover:bg-opacity-90 hover:scale-105
                 ${scrolled ? 'shadow-md' : 'shadow-lg shadow-white/10'}
               `}
             >
-              Register Now
+              Register Team for Tournaments
             </Link>
           </div>
 
@@ -122,11 +122,11 @@ export default function Navbar() {
             )
           })}
           <Link
-            href="/registration"
+            href="/tournaments"
             className="block px-3 py-2 rounded-md text-base font-medium bg-secondary text-white hover:bg-opacity-90 transition-colors duration-200"
             onClick={() => setIsOpen(false)}
           >
-            Register Now
+            Register Team for Tournaments
           </Link>
         </div>
       </motion.div>

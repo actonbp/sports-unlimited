@@ -1,0 +1,130 @@
+# Sports Unlimited - Cursor AI Rules
+# Based on Next.js 14, TypeScript, Tailwind CSS project structure
+
+# Project Context
+You are assisting with a sports organization website built with:
+- Next.js 14 with App Router
+- TypeScript
+- Tailwind CSS
+- Framer Motion for animations
+- Vercel deployment
+
+# Coding Standards
+1. TypeScript:
+   - Use strict type checking
+   - Prefer interfaces over types for object definitions
+   - Use proper type annotations for all functions and variables
+   - Avoid 'any' type unless absolutely necessary
+
+2. React/Next.js:
+   - Use 'use client' directive for client components
+   - Follow Next.js 14 App Router conventions
+   - Implement proper error boundaries
+   - Use Next.js Image component for optimized images
+   - Implement proper SEO meta tags
+
+3. Styling:
+   - Use Tailwind CSS utility classes
+   - Follow project color scheme:
+     - Primary: #0B2447
+     - Secondary: #D21312
+     - Accent: #FFFFFF
+     - Background: #F8F9FA
+   - Maintain responsive design patterns
+   - Use Framer Motion for animations
+
+4. Component Structure:
+   - Organize imports in this order:
+     1. React/Next.js imports
+     2. Third-party libraries
+     3. Components
+     4. Types/interfaces
+     5. Utilities
+   - Use proper component naming conventions (PascalCase)
+   - Implement proper prop types
+   - Use proper folder structure as defined in project
+
+5. State Management:
+   - Use React hooks appropriately
+   - Implement proper form validation
+   - Handle loading and error states
+   - Use proper data fetching patterns
+
+# Security Guidelines
+1. Never expose sensitive information in client-side code
+2. Implement proper form validation
+3. Use environment variables for sensitive data
+4. Follow security best practices for API routes
+5. Implement proper CSRF protection
+
+# Performance Guidelines
+1. Optimize images and assets
+2. Implement proper code splitting
+3. Use proper caching strategies
+4. Optimize component re-renders
+5. Follow proper lazy loading patterns
+
+# Documentation
+1. Add JSDoc comments for complex functions
+2. Document component props
+3. Add inline comments for complex logic
+4. Update INTERNAL_README.md for significant changes
+
+# Testing
+1. Write unit tests for utilities
+2. Implement integration tests for components
+3. Add E2E tests for critical paths
+4. Test responsive design
+5. Verify accessibility standards
+
+# Error Handling
+1. Implement proper error boundaries
+2. Add proper error logging
+3. Handle API errors gracefully
+4. Provide user-friendly error messages
+5. Implement proper form validation errors
+
+# Accessibility
+1. Use proper ARIA labels
+2. Implement keyboard navigation
+3. Maintain proper color contrast
+4. Add proper alt text for images
+5. Follow WCAG guidelines
+
+# Git Practices
+1. Write clear commit messages
+2. Follow conventional commits
+3. Update documentation when needed
+4. Never commit sensitive information
+5. Keep changes focused and atomic
+
+# Feature-Specific Guidelines
+1. Training Bookings:
+   - Implement proper date/time handling
+   - Add form validation
+   - Handle session availability
+
+2. Tournament Registration:
+   - Implement proper registration flow
+   - Handle payment integration
+   - Manage waitlist functionality
+
+3. SAVE Sports Program:
+   - Maintain proper content structure
+   - Handle contact form submissions
+   - Manage tryout schedules
+
+4. Content Management:
+   - Update news ticker properly
+   - Manage tournament schedules
+   - Handle career listings
+   - Update sponsorship information
+
+# Environment Setup
+1. Use proper environment variables
+2. Set up proper development environment
+3. Follow deployment checklist
+4. Maintain proper backup procedures
+5. Keep dependencies updated
+
+Remember: This is an internal sports organization website. Focus on user experience, performance, and maintainability. 
