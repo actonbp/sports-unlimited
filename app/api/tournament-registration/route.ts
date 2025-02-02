@@ -13,7 +13,8 @@ function getRequiredEnvVar(name: string): string {
 
 // Initialize Stripe with the correct secret key
 const stripe = new Stripe(getRequiredEnvVar('STRIPE_SECRET_KEY'), {
-  apiVersion: '2025-01-27.acacia',
+  apiVersion: '2023-10-16' as const,
+  typescript: true,
 })
 
 // Helper function to get tournament name
@@ -38,82 +39,109 @@ function getTournamentName(tournamentId: string): string {
 
 export async function POST(req: Request) {
   try {
+    // Validate Stripe configuration
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.error('Missing Stripe secret key')
+      return NextResponse.json(
+        { error: 'Payment configuration error' },
+        { status: 500 }
+      )
+    }
+
     // Check environment variables at runtime
     const edgeConfigId = getRequiredEnvVar('EDGE_CONFIG_ID')
     const edgeConfigToken = getRequiredEnvVar('EDGE_CONFIG_TOKEN')
 
     const data = await req.json()
-    const { teamName, coachName, coachEmail, coachPhone, ageGroup, numberOfPlayers, city, state, tournamentId, tournamentName } = data
+    const { teamName, coachName, coachEmail, coachPhone, ageGroup, numberOfPlayers, city, state, tournamentId } = data
+
+    // Get tournament name
+    const tournamentName = getTournamentName(tournamentId)
 
     // Create a unique ID for the registration
     const registrationId = `reg_${Date.now()}`
 
-    // Get existing registrations or initialize empty array
-    const existingRegistrations = await get<any[]>(`tournament_${tournamentId}_registrations`) || []
+    try {
+      // Get existing registrations or initialize empty array
+      const existingRegistrations = await get<any[]>(`tournament_${tournamentId}_registrations`) || []
 
-    // Add new registration
-    const newRegistration = {
-      registrationId,
-      teamName,
-      coachName,
-      coachEmail,
-      coachPhone,
-      ageGroup,
-      numberOfPlayers,
-      city,
-      state,
-      tournamentName,
-      registrationDate: new Date().toISOString(),
-      status: 'pending'
-    }
-
-    // Update registrations array
-    const updatedRegistrations = [...existingRegistrations, newRegistration]
-
-    // Update Edge Config using the REST API
-    const response = await fetch(`https://api.vercel.com/v1/edge-config/${edgeConfigId}/items`, {
-      method: 'PATCH',
-      headers: {
-        Authorization: `Bearer ${edgeConfigToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        items: [{
-          operation: 'update',
-          key: `tournament_${tournamentId}_registrations`,
-          value: updatedRegistrations
-        }]
-      })
-    })
-
-    if (!response.ok) {
-      throw new Error('Failed to update Edge Config')
-    }
-
-    // Determine payment amount based on tournament
-    const amount = tournamentId === 'nov27' ? 200 : 14000 // $2.00 for Quiz Bowl, $140.00 for others
-
-    // Create payment intent with tournament-specific amount
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount, // Amount in cents
-      currency: 'usd',
-      metadata: {
+      // Add new registration
+      const newRegistration = {
         registrationId,
-        tournamentId,
-        tournamentName,
         teamName,
         coachName,
-        numberOfPlayers: numberOfPlayers.toString()
-      },
-      description: `Tournament Registration - ${tournamentName} - Team: ${teamName}`
-    })
+        coachEmail,
+        coachPhone,
+        ageGroup,
+        numberOfPlayers,
+        city,
+        state,
+        tournamentName,
+        registrationDate: new Date().toISOString(),
+        status: 'pending'
+      }
 
-    return NextResponse.json({ 
-      clientSecret: paymentIntent.client_secret,
-      registrationId,
-      amount
-    })
+      // Update registrations array
+      const updatedRegistrations = [...existingRegistrations, newRegistration]
 
+      // Update Edge Config using the REST API
+      const response = await fetch(`https://api.vercel.com/v1/edge-config/${edgeConfigId}/items`, {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${edgeConfigToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: [{
+            operation: 'update',
+            key: `tournament_${tournamentId}_registrations`,
+            value: updatedRegistrations
+          }]
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to update Edge Config')
+      }
+
+      // Determine payment amount based on tournament
+      const amount = tournamentId === 'nov27' ? 200 : 14000 // $2.00 for Quiz Bowl, $140.00 for others
+
+      try {
+        // Create payment intent with tournament-specific amount
+        const paymentIntent = await stripe.paymentIntents.create({
+          amount, // Amount in cents
+          currency: 'usd',
+          metadata: {
+            registrationId,
+            tournamentId,
+            tournamentName,
+            teamName,
+            coachName,
+            numberOfPlayers: numberOfPlayers.toString()
+          },
+          description: `Tournament Registration - ${tournamentName} - Team: ${teamName}`
+        })
+
+        return NextResponse.json({ 
+          clientSecret: paymentIntent.client_secret,
+          registrationId,
+          amount
+        })
+      } catch (stripeError) {
+        console.error('Stripe error:', stripeError)
+        return NextResponse.json(
+          { error: 'Payment processing error' },
+          { status: 500 }
+        )
+      }
+    } catch (edgeError) {
+      console.error('Edge Config error:', edgeError)
+      return NextResponse.json(
+        { error: 'Registration storage error' },
+        { status: 500 }
+      )
+    }
   } catch (error) {
     console.error('Error processing registration:', error)
     return NextResponse.json(

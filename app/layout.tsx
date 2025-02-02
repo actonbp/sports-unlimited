@@ -2,9 +2,16 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 
 const inter = Inter({ subsets: ['latin'] })
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
 
 export const metadata: Metadata = {
   title: 'Sports Unlimited',
@@ -17,7 +24,7 @@ export const metadata: Metadata = {
     siteName: 'Sports Unlimited',
     images: [
       {
-        url: '/images/slides_image-2.jpg',
+        url: 'https://sportsunlimitednc.com/opengraph-image.png',
         width: 1200,
         height: 630,
         alt: 'Sports Unlimited - Building Community Through Sports',
@@ -30,27 +37,18 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Sports Unlimited',
     description: 'Building Community Through Sports',
-    images: ['/images/slides_image-2.jpg'],
+    images: ['https://sportsunlimitednc.com/opengraph-image.png'],
   },
   other: {
-    'apple-mobile-web-app-capable': 'yes',
-    'apple-mobile-web-app-title': 'Sports Unlimited',
+    'mobile-web-app-capable': 'yes',
     'format-detection': 'telephone=no',
-    'apple-itunes-app': 'app-id=myAppStoreID',
-    'og:image:type': 'image/png',
   },
-  appleWebApp: {
-    title: 'Sports Unlimited',
-    statusBarStyle: 'black-translucent',
-    startupImage: [
-      {
-        url: 'https://https://sportsunlimitednc.com/opengraph-image',
-        media: '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)',
-      }
-    ],
-  },
+  manifest: '/manifest.json',
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.png', type: 'image/png', sizes: '32x32' }
+    ],
     apple: [
       { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
     ],
@@ -64,6 +62,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content={viewport.width} />
+      </head>
       <body className={inter.className}>
         <Header />
         <main>
