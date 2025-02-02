@@ -2,21 +2,17 @@ import { get } from '@vercel/edge-config'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
-// Check required environment variables
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('STRIPE_SECRET_KEY is not set in environment variables')
-}
-
-if (!process.env.EDGE_CONFIG_ID) {
-  throw new Error('EDGE_CONFIG_ID is not set in environment variables')
-}
-
-if (!process.env.EDGE_CONFIG_TOKEN) {
-  throw new Error('EDGE_CONFIG_TOKEN is not set in environment variables')
+// Helper function to check environment variables at runtime
+function getRequiredEnvVar(name: string): string {
+  const value = process.env[name]
+  if (!value) {
+    throw new Error(`${name} is not set in environment variables`)
+  }
+  return value
 }
 
 // Initialize Stripe with the correct secret key
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+const stripe = new Stripe(getRequiredEnvVar('STRIPE_SECRET_KEY'), {
   apiVersion: '2025-01-27.acacia',
 })
 
@@ -43,6 +39,10 @@ function getTournamentName(tournamentId: string): string {
 
 export async function POST(req: Request) {
   try {
+    // Check environment variables at runtime
+    const edgeConfigId = getRequiredEnvVar('EDGE_CONFIG_ID')
+    const edgeConfigToken = getRequiredEnvVar('EDGE_CONFIG_TOKEN')
+
     const data = await req.json()
     const { teamName, coachName, coachEmail, coachPhone, ageGroup, numberOfPlayers, city, state, tournamentId, tournamentName } = data
 
@@ -72,10 +72,10 @@ export async function POST(req: Request) {
     const updatedRegistrations = [...existingRegistrations, newRegistration]
 
     // Update Edge Config using the REST API
-    const response = await fetch(`https://api.vercel.com/v1/edge-config/${process.env.EDGE_CONFIG_ID}/items`, {
+    const response = await fetch(`https://api.vercel.com/v1/edge-config/${edgeConfigId}/items`, {
       method: 'PATCH',
       headers: {
-        Authorization: `Bearer ${process.env.EDGE_CONFIG_TOKEN}`,
+        Authorization: `Bearer ${edgeConfigToken}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -122,6 +122,10 @@ export async function POST(req: Request) {
 // Handle successful payments
 export async function PUT(req: Request) {
   try {
+    // Check environment variables at runtime
+    const edgeConfigId = getRequiredEnvVar('EDGE_CONFIG_ID')
+    const edgeConfigToken = getRequiredEnvVar('EDGE_CONFIG_TOKEN')
+
     const { registrationId, tournamentId } = await req.json()
     
     // Get existing registrations
@@ -135,10 +139,10 @@ export async function PUT(req: Request) {
     )
 
     // Update Edge Config using the REST API
-    const response = await fetch(`https://api.vercel.com/v1/edge-config/${process.env.EDGE_CONFIG_ID}/items`, {
+    const response = await fetch(`https://api.vercel.com/v1/edge-config/${edgeConfigId}/items`, {
       method: 'PATCH',
       headers: {
-        Authorization: `Bearer ${process.env.EDGE_CONFIG_TOKEN}`,
+        Authorization: `Bearer ${edgeConfigToken}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({

@@ -1,12 +1,17 @@
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('STRIPE_SECRET_KEY is not set in environment variables')
+// Helper function to check environment variables at runtime
+function getRequiredEnvVar(name: string): string {
+  const value = process.env[name]
+  if (!value) {
+    throw new Error(`${name} is not set in environment variables`)
+  }
+  return value
 }
 
-// Initialize Stripe with your secret key
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+// Initialize Stripe with the correct secret key
+const stripe = new Stripe(getRequiredEnvVar('STRIPE_SECRET_KEY'), {
   apiVersion: '2025-01-27.acacia',
 })
 
