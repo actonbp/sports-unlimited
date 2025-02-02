@@ -58,7 +58,10 @@ export async function POST(req: Request) {
     }
 
     // Update registrations in Edge Config
-    await config.set(`tournament_${tournamentId}_registrations`, [...existingRegistrations, newRegistration])
+    await config.upsert([{
+      key: `tournament_${tournamentId}_registrations`,
+      value: [...existingRegistrations, newRegistration]
+    }])
 
     // Create payment intent
     const paymentIntent = await stripe.paymentIntents.create({
@@ -103,8 +106,11 @@ export async function PUT(req: Request) {
         : reg
     )
 
-    // Save updated registrations
-    await config.set(`tournament_${tournamentId}_registrations`, updatedRegistrations)
+    // Save updated registrations using upsert
+    await config.upsert([{
+      key: `tournament_${tournamentId}_registrations`,
+      value: updatedRegistrations
+    }])
     
     return NextResponse.json({ success: true })
   } catch (error) {
